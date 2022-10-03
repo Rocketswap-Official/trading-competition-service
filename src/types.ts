@@ -17,18 +17,28 @@ export interface I_ReservesState {
     [key: string]: [{ __fixed__: string }, { __fixed__: string }];
 }
 
-export interface I_Competition {
+export interface I_Comp {
     id: string,
-    competition_contract: string
+    comp_contract: string
     reward_contract: string
     prizes: number[]
     date_start: number // unix
     date_end: number // unix
 }
 
-interface I_CompetitionResults {
+export interface I_CompResults {
     competition_id: string
     results: I_UserCompetitionResult[]
+}
+
+export interface I_CompJson {
+    comp_contract: string,
+    reward_contract: string,
+    prizes: number[],
+    date_start: number,
+    date_end: number
+    comp_contract_title: string
+    reward_contract_title: string
 }
 
 export interface I_UserCompetitionResult {
