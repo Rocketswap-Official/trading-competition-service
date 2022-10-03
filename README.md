@@ -1,3 +1,3 @@
-# Rocketswap Candles
+# Rocketswap Trading Competition Service
 
-A lightweight service for creating OHLC candle data from RSWP data.
+A lightweight service for running trading competitions
