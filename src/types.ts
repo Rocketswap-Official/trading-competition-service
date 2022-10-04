@@ -22,8 +22,8 @@ export interface I_Comp {
     comp_contract: string
     reward_contract: string
     prizes: number[]
-    date_start: number // unix
-    date_end: number // unix
+    date_start: Date // unix
+    date_end: Date // unix
 }
 
 export interface I_CompResults {
@@ -35,20 +35,23 @@ export interface I_CompJson {
     comp_contract: string,
     reward_contract: string,
     prizes: number[],
-    date_start: number,
-    date_end: number
+    date_start: T_CompDate,
+    date_end: T_CompDate
     comp_contract_title: string
     reward_contract_title: string
 }
 
 export interface I_UserCompetitionResult {
     id: string
+    competition_id: string
     user_vk: string
     rocket_id?: string
     volume_tau: number
     volume_token?: number
     volume_usd?: number
 }
+
+export type T_CompDate = { year: number, month: number, day: number, hour: number }
 
 // @Entity()
 // export class CompetitionEntity extends BaseEntity {

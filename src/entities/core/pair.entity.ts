@@ -116,13 +116,14 @@ async function updateReserves(args: {
 				time: timestamp,
 				hash
 			});
-			saveTradeUpdate({
-				contract_name,
-				type: fn,
-				amount: amount_exchanged,
-				price,
-				time: timestamp,
-			});
+			// saveTradeUpdate({
+			// 	contract_name,
+			// 	type: fn,
+			// 	amount: amount_exchanged,
+			// 	price,
+			// 	time: timestamp,
+			// 	hash
+			// });
 		}
 	}
 
@@ -197,8 +198,6 @@ export async function updatePairReserves(state: I_Kvp[]) {
 
 	const reserves_updates = state.filter(s => s.key.includes('reserves'))
 	if (!reserves_updates.length) return
-
-	log.log({ reserves_updates })
 
 	const reserves_to_update = reserves_updates.map(r => {
 		return {

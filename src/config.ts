@@ -5,7 +5,7 @@ export const config_prod = {
     network_type: "mainnet",
     block_service_urls: process.env.block_service_urls?.split(",") || ["0.0.0.0:3535"],
     starting_tx_id: "000001044563.00000.00000",
-    frequency: 60000
+    frequency: 10000
 };
 
 /**

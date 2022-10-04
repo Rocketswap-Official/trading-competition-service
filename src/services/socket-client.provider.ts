@@ -27,7 +27,7 @@ export function initSocket(parseBlockFn: T_ParseBlockFn) {
 
 			// socket.on("new-state-changes-by-transaction", (event, payload) => {
 			// 	log.log({event, payload})
-				// log.log({ event: JSON.parse(event), payload: JSON.parse(payload) })
+			// log.log({ event: JSON.parse(event), payload: JSON.parse(payload) })
 			// })
 
 			// socket.on("new-state-changes-one", (event, payload) => {
@@ -53,14 +53,15 @@ export function initSocket(parseBlockFn: T_ParseBlockFn) {
 
 export async function handleNewBlock(block: IBsBlock, parseBlockFn: T_ParseBlockFn) {
 	const has_transaction = block.subblocks.length && block.subblocks[0].transactions.length;
-	log.log({block})
-	log.log({subblocks: block.subblocks})
+	// log.log({block})
+	// log.log({subblocks: block.subblocks})
 	if (!has_transaction) return;
 	// log.log({ block })
 	const { subblocks, number: block_num } = block;
 	for (let sb of subblocks) {
 		const { transactions } = sb;
 		for (let t of transactions) {
+			log.log({ t })
 			const { state, hash, transaction } = t;
 			const fn = transaction.payload.function;
 			const { contract } = transaction.payload;

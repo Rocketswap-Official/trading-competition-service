@@ -4,14 +4,18 @@ import {
 	Column,
 	PrimaryColumn,
 	BaseEntity,
+	PrimaryGeneratedColumn,
 } from "typeorm";
 import { I_UserCompetitionResult } from "../types";
 
 
 @Entity()
 export class UserResultEntity extends BaseEntity implements I_UserCompetitionResult {
-	@PrimaryColumn()
+	@PrimaryGeneratedColumn()
 	id: string;
+
+	@Column()
+	competition_id: string;
 
 	@Column()
 	user_vk: string
@@ -27,4 +31,8 @@ export class UserResultEntity extends BaseEntity implements I_UserCompetitionRes
 
 	@Column({ nullable: true })
 	volume_usd?: number
+}
+
+export async function findAllUserResults() {
+	return await UserResultEntity.find()
 }

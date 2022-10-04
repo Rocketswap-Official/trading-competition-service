@@ -48,35 +48,31 @@ export class DataSyncProvider {
 	public parseBlock = async (block: BlockDTO) => {
 		const { state, fn, timestamp, hash } = block;
 		try {
-			/**
-			 * Transactions we're interested in :
-			 * 1. New pairs being added
-			 * 2. Trades
-			 * 3. Changes to the reserves of a pair
-			 */
 			const amm_state_changes = state.filter((s) => s.key.split(".")[0] === getConfig().amm_contract)
 			if (!amm_state_changes.length) return
 
+			const currency_state_change = state.find(s => s.key.split(":")[0] === "currency.balances" && s.key.split(":")[1] !== config.amm_contract)
+			const user_vk = currency_state_change.key.split(":")[1]
+
 			await this.processAmmBlock({
-				state: amm_state_changes
+				state: amm_state_changes,
+				hash,
+				timestamp,
+				user_vk
 			});
 		} catch (err) {
 			log.log({ err })
 		}
 	};
 
-	processAmmBlock = async (args: { state: I_Kvp[] }) => {
-		const { state } = args;
+	processAmmBlock = async (args: { state: I_Kvp[], hash: string, timestamp: number, user_vk: string }) => {
+		const { state, hash, timestamp, user_vk } = args;
 		try {
-			/**
-			 * TO-DO :
-			 * if a new pair is created, we must create a genesis candle for it as well.
-			 */
 			await savePair({
 				state,
 			});
 			await DataSyncProvider.updateTokenList()
-			await saveTrade(state)
+			await saveTrade(state, hash, timestamp, user_vk)
 			await updatePairReserves(state)
 		} catch (err) {
 			log.log({ err })
@@ -84,31 +80,27 @@ export class DataSyncProvider {
 	}
 }
 
-const saveTrade = async (state: I_Kvp[]) => {
+const saveTrade = async (state: I_Kvp[], hash, timestamp, user_vk: string) => {
+	log.log({ state })
 	const traded_tokens = state.filter(s => s.key.includes("prices"))
 	if (!traded_tokens.length) return
 	for (let token of traded_tokens) {
 		const contract_name = token.key.split(":")[1]
 		const price = getVal(traded_tokens.find(s => s.key.includes(contract_name)))
 		const reserves = state.find(s => s.key.includes('reserves') && s.key.includes(contract_name)).value
-		await processTrade(contract_name, reserves, price)
+		await processTrade(contract_name, reserves, price, hash, timestamp, user_vk)
 	}
 }
 
-const processTrade = async (contract_name: string, reserves: any[], price: string) => {
+const processTrade = async (contract_name: string, reserves: any[], price: string, hash: string, timestamp: number, vk: string) => {
 	const pair = await PairEntity.findOne(contract_name)
 	const pair_reserves_old = [Number(pair.reserves[0]), Number(pair.reserves[1])]
 	const pair_reserves_new = [Number(getValue(reserves[0])), Number(getValue(reserves[1]))]
 
-	// log.log({ pair_reserves_old, pair_reserves_new })
-
-	// determine if buy or sell
 	const type: "buy" | "sell" = pair_reserves_old[0] < pair_reserves_new[0] ? "buy" : "sell"
 
-	// get volume
 	const dif = pair_reserves_old[1] - pair_reserves_new[1]
 	const volume = dif > 0 ? dif : dif * -1
-	// log.log({ volume })
-	// save trade
-	await saveTradeUpdate({ contract_name, price, amount: String(volume), type, time: Date.now() })
+
+	await saveTradeUpdate({ contract_name, price, amount: String(volume), type, time: timestamp, hash, vk })
 }
