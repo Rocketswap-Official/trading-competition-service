@@ -61,7 +61,6 @@ export async function handleNewBlock(block: IBsBlock, parseBlockFn: T_ParseBlock
 	for (let sb of subblocks) {
 		const { transactions } = sb;
 		for (let t of transactions) {
-			log.log({ t })
 			const { state, hash, transaction } = t;
 			const fn = transaction.payload.function;
 			const { contract } = transaction.payload;
