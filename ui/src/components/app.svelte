@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { onMount } from "svelte";
 	import PoweredByLamden from "../powered-by-lamden.svelte";
-	import Router from 'svelte-hash-router'
-
+	import Router from "svelte-hash-router";
+	import { syncCompetitions } from "../utils/api.utils";
 
 	export let width = "190px";
 
-	onMount(() => {
+	onMount(async () => {
+		await syncCompetitions();
 		const canvas: any = window.document.getElementById("canvas");
 		const c = canvas.getContext("2d");
 
@@ -48,8 +49,7 @@
 
 		const putPixel = (x, y, brightness) => {
 			const intensity = brightness * 255;
-			const rgb =
-				"rgb(" + intensity + "," + intensity + "," + intensity + ")";
+			const rgb = "rgb(" + intensity + "," + intensity + "," + intensity + ")";
 			c.fillStyle = rgb;
 			c.fillRect(x, y, 1, 1);
 		};
@@ -110,18 +110,20 @@
 	<div
 		style="position: absolute; top:0%; left: 0%; text-align: center; height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column"
 	>
-	<Router />
+		<Router />
 	</div>
-	<canvas
-		id="canvas"
-		style="width: 100%; height: 100%; padding: 0; margin: 0; z-index: 99"
-	/>
+	<canvas id="canvas" style="width: 100%; height: 100%; padding: 0; margin: 0; z-index: 99" />
 	<!-- <div id="powered">
 		<PoweredByLamden />
 	</div> -->
 </main>
 
 <style>
+	:global(*) {
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+	}
 	main {
 		height: 100%;
 		width: 100%;

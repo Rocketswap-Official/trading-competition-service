@@ -2,9 +2,18 @@
 	import { onMount } from "svelte";
 	import axios from "axios";
 	import { each } from "svelte/internal";
+	import { params } from "svelte-hash-router";
 	import { competitions_store } from "../store";
+	import { formatAccountAddress } from "../utils/misc.utils";
 
-	onMount(async () => {});
+	let id = $params.id;
+	let comp;
+	onMount(async () => {
+		competitions_store.subscribe((comps) => {
+			comp = comps.find((c) => c.id === id);
+			// console.log(comp);
+		});
+	});
 
 	function getDateFromUnix(unix_timestamp: number) {
 		const d = new Date(unix_timestamp);
@@ -17,30 +26,44 @@
 </script>
 
 <div class="main-container">
-	<div class="header">Rocketswap Trading Leaderboard</div>
-	<div class="list-container">
-		<div class="comp-header">
-			<div class="w-20 t-l">Market</div>
-			<div class="w-20 t-l">Start Date</div>
-			<div class="w-20 t-l">End Date</div>
-			<div class="w-20 t-r">Rewards</div>
-		</div>
-		{#each $competitions_store as comp}
-			<div class="comp-item">
-				<div class="w-20 t-l">{comp.comp_contract_title}</div>
-				<div class="w-20 t-l">{getDateFromUnix(comp.date_start_unix)}</div>
-				<div class="w-20 t-l">{getDateFromUnix(comp.date_end_unix)}</div>
-				<div class="w-20 t-r">{comp.reward_contract_title} {getFullPrize(comp.prizes)}</div>
-				<div class="w-10 t-c button-cont">
-					<a href={`/#/competition/${comp.id}`} class="gradient-button gradient-button-1">More</a>
-				</div>
+	{#if comp}
+		<div class="header">
+			<div class="button-cont">
+				<a href={`/#/`} class="circle-button gradient-button-1"><img src="icon-back.svg" alt="" /></a>
 			</div>
-		{/each}
-	</div>
+			<div style="margin-left: 1em">{comp?.comp_contract_title} Leaderboard</div>
+			<div class="dates-cont">{getDateFromUnix(comp.date_start_unix)} - {getDateFromUnix(comp.date_end_unix)}</div>
+		</div>
+		<!-- {#if comp} -->
+		<div class="list-container">
+			<div class="comp-header">
+				<div class="w-5 t-l">#</div>
+				<div class="w-30 t-l">Address</div>
+				<div class="w-30 t-l">Volume (TAU)</div>
+				<div class="w-30 t-r">Prize ({comp.reward_contract_title})</div>
+			</div>
+			{#each comp.results as result, i}
+				<div class="comp-item">
+					<div class="w-5 t-l">{i + 1}</div>
+					<div class="w-30 t-l">{result.rocket_id || formatAccountAddress(result.user_vk)}</div>
+					<div class="w-30 t-l">{result.volume_tau}</div>
+					<div class="w-30 t-r">{comp.prizes[i]}</div>
+				</div>
+			{/each}
+		</div>
+	{/if}
 </div>
 
 <style>
-	.gradient-button {
+	.dates-cont {
+		/* justify-self: flex-end; */
+		flex-grow: 1;
+		text-align: right;
+		font-size: 0.8em;
+		font-style: italic;
+	}
+
+	.circle-button {
 		/* margin: 10px; */
 		/* font-family: "Arial Black", Gadget, sans-serif; */
 		font-size: 0.8em;
@@ -56,14 +79,19 @@
 		transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 		cursor: pointer;
 		display: inline-block;
-		border-radius: 4px;
+		height: 1.6em;
+		width: 1.6em;
+		border-radius: 50%;
 	}
+
 	.gradient-button:hover {
 		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 	}
+
 	.gradient-button-1 {
 		background-image: linear-gradient(to right, #20c5c0 0%, #a4f4ac 51%, #73e2b6 100%);
 	}
+
 	.gradient-button-1:hover {
 		background-position: right center;
 	}
@@ -78,20 +106,33 @@
 	.t-l {
 		text-align: left;
 	}
-	.w-20 {
-		width: 20%;
+	.w-5 {
+		width: 5%;
 	}
 	.w-10 {
+		width: 10%;
+	}
+	.w-20 {
 		width: 20%;
 	}
 
 	.w-25 {
 		width: 25%;
 	}
+	.w-30 {
+		width: 30%;
+	}
 
 	.comp-header {
 		font-weight: 600;
 		font-size: 1.3em;
+	}
+
+	.circle-button img {
+		height: 1.1em;
+		width: 1.1em;
+		margin-left: -0.17em;
+		margin-top: -0.05em;
 	}
 
 	.comp-item,
@@ -101,9 +142,6 @@
 		flex-direction: row;
 		padding: 10px 20px;
 		align-items: center;
-		box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
 	}
 	.list-container {
 		margin-top: 40px;
@@ -116,6 +154,7 @@
 		font-size: 1.5rem;
 		text-align: left;
 		display: flex;
+		flex-direction: row;
 		align-items: center;
 		padding: 0px 25px;
 	}
