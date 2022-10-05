@@ -68,8 +68,9 @@ export async function createCompetitions(comp_json: I_CompJson[]) {
 }
 
 function constructCompetitionId(comp_data: I_CompJson) {
-	const str = `${comp_data.comp_contract}-${comp_data.reward_contract}-${constructDate(comp_data.date_start).getTime()}-${constructDate(comp_data.date_end).getTime()}`
-	return crypto.createHash('md5').update(str).digest('hex');
+	const str = `${comp_data.comp_contract}${constructDate(comp_data.date_start).getTime()}`
+	// return crypto.createHash('md5').update(str).digest('hex');
+	return str
 }
 
 export async function findActiveCompetitions() {
