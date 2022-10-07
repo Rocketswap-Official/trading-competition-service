@@ -19,7 +19,6 @@ routes.set({
 	}
 })
 
-
 const app = new App({
 	target: document.body,
 });
