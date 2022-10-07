@@ -5,6 +5,7 @@
 	import { params } from "svelte-hash-router";
 	import { competitions_store } from "../store";
 	import { formatAccountAddress } from "../utils/misc.utils";
+	import { addCommas } from "../utils";
 
 	let id = $params.id;
 	let comp;
@@ -46,8 +47,8 @@
 				<div class="comp-item">
 					<div class="w-5 t-l">{i + 1}</div>
 					<div class="w-30 t-l">{result.rocket_id || formatAccountAddress(result.user_vk)}</div>
-					<div class="w-30 t-l">{result.volume_tau}</div>
-					<div class="w-30 t-r">{comp.prizes[i]}</div>
+					<div class="w-30 t-l">{addCommas(result.volume_tau, 4)}</div>
+					<div class="w-30 t-r">{comp.prizes[i] ? addCommas(comp.prizes[i]) : "0"}</div>
 				</div>
 			{/each}
 		</div>

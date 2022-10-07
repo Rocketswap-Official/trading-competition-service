@@ -4,6 +4,7 @@
 	import { each } from "svelte/internal";
 	import { competitions_store } from "../store";
 	import config from "../config";
+	import { addCommas } from "../utils";
 
 	onMount(() => {
 		console.log(config.is_prod)
@@ -20,7 +21,7 @@
 </script>
 
 <div class="main-container">
-	<div class="header">Rocketswap Trading Leaderboard</div>
+	<div class="header">Rocketswap Leaderboard</div>
 	<div class="list-container">
 		<div class="comp-header">
 			<div class="w-20 t-l">Market</div>
@@ -33,7 +34,7 @@
 				<div class="w-20 t-l">{comp.comp_contract_title}</div>
 				<div class="w-20 t-l">{getDateFromUnix(comp.date_start_unix)}</div>
 				<div class="w-20 t-l">{getDateFromUnix(comp.date_end_unix)}</div>
-				<div class="w-20 t-r">{comp.reward_contract_title} {getFullPrize(comp.prizes)}</div>
+				<div class="w-20 t-r">{comp.reward_contract_title} {addCommas(getFullPrize(comp.prizes))}</div>
 				<div class="w-20 t-c button-cont">
 					<a href={`/#/competition/${comp.id}`} class="gradient-button gradient-button-1">More</a>
 					<a href={`https://rocketswap.exchange/#/swap/${comp.comp_contract}`} class="gradient-button gradient-button-1" target="_blank">Trade</a>
