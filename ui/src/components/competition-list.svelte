@@ -31,8 +31,9 @@
 				<div class="w-20 t-l">{getDateFromUnix(comp.date_start_unix)}</div>
 				<div class="w-20 t-l">{getDateFromUnix(comp.date_end_unix)}</div>
 				<div class="w-20 t-r">{comp.reward_contract_title} {getFullPrize(comp.prizes)}</div>
-				<div class="w-10 t-c button-cont">
+				<div class="w-20 t-c button-cont">
 					<a href={`/#/competition/${comp.id}`} class="gradient-button gradient-button-1">More</a>
+					<a href={`https://rocketswap.exchange/#/swap/${comp.comp_contract}`} class="gradient-button gradient-button-1" target="_blank">Trade</a>
 				</div>
 			</div>
 		{/each}
