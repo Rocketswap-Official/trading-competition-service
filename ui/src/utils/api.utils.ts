@@ -5,6 +5,7 @@ import { competitions_store } from "../store";
 const base_url = config.is_prod ? 'api/' : 'http://0.0.0.0:2001/'
 
 export async function syncCompetitions() {
+    console.log(config.is_prod)
     try {
         const competitions = (await axios.get(`${base_url}get_competitions/`)).data;
         competitions_store.set(competitions)

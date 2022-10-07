@@ -15,6 +15,8 @@ const configToReplace = {
 	is_prod: production
 };
 
+console.log({production})
+
 for (const [key, v] of Object.entries(config().parsed)) {
 	configToReplace[`${key}`] = `'${v}'`;
 }
