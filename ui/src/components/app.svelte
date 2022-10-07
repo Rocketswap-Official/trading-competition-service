@@ -40,7 +40,7 @@
 			return out;
 		};
 
-		let stars = makeStars(10000);
+		let stars = makeStars(4000);
 
 		const clear = () => {
 			c.fillStyle = "black";
@@ -51,7 +51,7 @@
 			const intensity = brightness * 255;
 			const rgb = "rgb(" + intensity + "," + intensity + "," + intensity + ")";
 			c.fillStyle = rgb;
-			c.fillRect(x, y, 1, 1);
+			c.fillRect(x, y, 3, 3);
 		};
 
 		const moveStars = (distance) => {
@@ -113,9 +113,9 @@
 		<Router />
 	</div>
 	<canvas id="canvas" style="width: 100%; height: 100%; padding: 0; margin: 0; z-index: 99" />
-	<!-- <div id="powered">
+	<div id="powered">
 		<PoweredByLamden />
-	</div> -->
+	</div>
 </main>
 
 <style>
@@ -124,6 +124,22 @@
 		-moz-box-sizing: border-box;
 		-webkit-box-sizing: border-box;
 	}
+
+	:global(.main-container) {
+		height: 93%;
+		width: 93%;
+		max-height: 600px;
+		max-width: 800px;
+		background-color: rgba(14, 23, 32, 0.7);
+		overflow-y: scroll;
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+
+	:global(.main-container::-webkit-scrollbar) {
+		display: none;
+	}
+
 	main {
 		height: 100%;
 		width: 100%;

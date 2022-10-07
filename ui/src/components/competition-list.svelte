@@ -113,7 +113,6 @@
 	.list-container {
 		margin-top: 40px;
 		width: 100%;
-		/* border: 1px solid red; */
 	}
 	.header {
 		width: 100%;
@@ -123,10 +122,5 @@
 		display: flex;
 		align-items: center;
 		padding: 0px 25px;
-	}
-	.main-container {
-		min-height: 93%;
-		min-width: 93%;
-		background-color: rgba(14, 23, 32, 0.7);
 	}
 </style>
