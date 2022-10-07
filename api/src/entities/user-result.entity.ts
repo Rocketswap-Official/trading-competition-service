@@ -34,5 +34,5 @@ export class UserResultEntity extends BaseEntity implements I_UserCompetitionRes
 }
 
 export async function findAllUserResults() {
-	return await UserResultEntity.find()
+	return await UserResultEntity.find({ order: { volume_tau: "DESC" } })
 }
