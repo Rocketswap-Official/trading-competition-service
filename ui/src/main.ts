@@ -2,6 +2,8 @@ import App from './components/app.svelte';
 import CompetitionList from './components/competition-list.svelte';
 import CompetitionDetail from './components/competition-detail.svelte';
 import { routes } from 'svelte-hash-router'
+import config from './config'
+
 
 
 routes.set({
@@ -12,7 +14,7 @@ routes.set({
 	'/competition/': {
 		$$component: CompetitionDetail,
 		$$name: 'CompetitionDetail',
-		':id':CompetitionDetail
+		':id': CompetitionDetail
 	},
 	'*': {
 		$$redirect: '/'

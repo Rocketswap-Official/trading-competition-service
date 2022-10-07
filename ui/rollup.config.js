@@ -14,6 +14,7 @@ const production = !process.env.ROLLUP_WATCH;
 const configToReplace = {
 	is_prod: production
 };
+
 for (const [key, v] of Object.entries(config().parsed)) {
 	configToReplace[`${key}`] = `'${v}'`;
 }
