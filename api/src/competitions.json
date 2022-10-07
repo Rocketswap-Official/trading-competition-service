@@ -5,60 +5,87 @@
     "reward_contract": "con_lambdoge",
     "reward_contract_title": "LDOGE",
     "prizes": [
-      100000000,
-      800000,
-      700000,
-      600000,
-      500000,
-      400000,
-      30000,
-      30000,
-      30000,
-      10000,
-      5000
+      5000000000,
+      4000000000,
+      3500000000,
+      3000000000,
+      2500000000,
+      2000000000,
+      150000000,
+      150000000,
+      150000000,
+      50000000,
+      25000000
     ],
     "date_start": {
       "year": 2022,
       "month": 9,
-      "day": 4,
-      "hour": 7
+      "day": 7,
+      "hour": 12
     },
     "date_end": {
       "year": 2022,
       "month": 9,
-      "day": 17,
-      "hour": 12
+      "day": 21,
+      "hour": 14
     }
   },
   {
-    "comp_contract": "con_phi_lst001",
-    "comp_contract_title": "PHI",
-    "reward_contract": "con_phi_lst001",
-    "reward_contract_title": "PHI",
+    "comp_contract": "com_lusd_lst001",
+    "comp_contract_title": "LUSD",
+    "reward_contract": "com_lusd_lst001",
+    "reward_contract_title": "LUSD",
     "prizes": [
-      100000000,
-      800000,
-      700000,
-      600000,
-      500000,
-      400000,
+      30,
+      20,
+      10,
+      10,
+      5,
+      5,
+      5,
+      5,
+      5
+    ],
+    "date_start": {
+      "year": 2022,
+      "month": 9,
+      "day": 7,
+      "hour": 12
+    },
+    "date_end": {
+      "year": 2022,
+      "month": 9,
+      "day": 21,
+      "hour": 14
+    }
+  },
+  {
+    "comp_contract": "con_rswp_lst001",
+    "comp_contract_title": "RSWP",
+    "reward_contract": "con_rswp_lst001",
+    "reward_contract_title": "RSWP",
+    "prizes": [
+      50000,
+      40000,
       30000,
-      30000,
-      30000,
+      20000,
       10000,
+      5000,
+      5000,
+      5000,
       5000
     ],
     "date_start": {
       "year": 2022,
       "month": 9,
-      "day": 4,
-      "hour": 14
+      "day": 7,
+      "hour": 12
     },
     "date_end": {
       "year": 2022,
       "month": 9,
-      "day": 17,
-      "hour": 12
+      "day": 21,
+      "hour": 14
     }
   }
 ]
