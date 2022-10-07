@@ -3,8 +3,11 @@
 	import axios from "axios";
 	import { each } from "svelte/internal";
 	import { competitions_store } from "../store";
+	import config from "../config";
 
-	onMount(async () => {});
+	onMount(() => {
+		console.log(config.is_prod)
+	});
 
 	function getDateFromUnix(unix_timestamp: number) {
 		const d = new Date(unix_timestamp);
