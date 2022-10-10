@@ -25,7 +25,7 @@ export function getDateFromUnix(unix_timestamp: number) {
 
 export function getUtcTimeFromUnix(unix_timestamp: number) {
   const d = new Date(unix_timestamp)
-  return `${toTwoChars(d.getHours())}:${toTwoChars(d.getMinutes())} UTC`
+    return`${toTwoChars(d.getUTCHours())}:${toTwoChars(d.getUTCMinutes())} UTC`
 }
 
 function toTwoChars(num: number) {

@@ -85,5 +85,15 @@ export async function findAllCompetitions() {
 
 function constructDate(date: T_CompDate) {
 	const { year, month, day, hour } = date
-	return new Date(year, month, day, hour)
+	const { hours_offset } = calcUtcOffset()
+	return new Date(year, month, day, hour + hours_offset)
+}
+
+function calcUtcOffset() {
+	const now = new Date(Date.now())
+	const now_hours = now.getHours()
+	const utc_hours = now.getUTCHours()
+	const now_minutes = now.getMinutes()
+	const utc_minutes = now.getUTCMinutes()
+	return { hours_offset: now_hours - utc_hours, minutes_offset: now_minutes - utc_minutes }
 }
