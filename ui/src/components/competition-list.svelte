@@ -1,23 +1,9 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-	import axios from "axios";
-	import { each } from "svelte/internal";
 	import { competitions_store } from "../store";
-	import config from "../config";
-	import { addCommas } from "../utils";
+	import { addCommas, getDateFromUnix, getFullPrize, getUtcTimeFromUnix } from "../utils/misc.utils";
 
-	onMount(() => {
-		console.log(config.is_prod)
-	});
-
-	function getDateFromUnix(unix_timestamp: number) {
-		const d = new Date(unix_timestamp);
-		return `${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`;
-	}
-
-	function getFullPrize(prizes: number[]) {
-		return prizes.reduce((accum, prize) => Number(accum) + Number(prize), 0);
-	}
+	onMount(() => {});
 </script>
 
 <div class="main-container">
@@ -32,12 +18,16 @@
 		{#each $competitions_store as comp}
 			<div class="comp-item">
 				<div class="w-20 t-l">{comp.comp_contract_title}</div>
-				<div class="w-20 t-l">{getDateFromUnix(comp.date_start_unix)}</div>
-				<div class="w-20 t-l">{getDateFromUnix(comp.date_end_unix)}</div>
+				<div class="w-20 t-l">{getDateFromUnix(comp.date_start_unix)} <br />{getUtcTimeFromUnix(comp.date_start_unix)}</div>
+				<div class="w-20 t-l">{getDateFromUnix(comp.date_end_unix)} <br />{getUtcTimeFromUnix(comp.date_end_unix)}</div>
 				<div class="w-20 t-r">{comp.reward_contract_title} {addCommas(getFullPrize(comp.prizes))}</div>
 				<div class="w-20 t-c button-cont">
 					<a href={`/#/competition/${comp.id}`} class="gradient-button gradient-button-1">More</a>
-					<a href={`https://rocketswap.exchange/#/swap/${comp.comp_contract}`} class="gradient-button gradient-button-1" target="_blank">Trade</a>
+					<a
+						href={`https://rocketswap.exchange/#/swap/${comp.comp_contract}`}
+						class="gradient-button gradient-button-1"
+						target="_blank">Trade</a
+					>
 				</div>
 			</div>
 		{/each}

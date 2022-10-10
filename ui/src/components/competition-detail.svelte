@@ -1,11 +1,8 @@
 <script lang="ts">
 	import { onMount } from "svelte";
-	import axios from "axios";
-	import { each } from "svelte/internal";
 	import { params } from "svelte-hash-router";
 	import { competitions_store } from "../store";
-	import { formatAccountAddress } from "../utils/misc.utils";
-	import { addCommas } from "../utils";
+	import { addCommas, formatAccountAddress } from "../utils/misc.utils";
 
 	let id = $params.id;
 	let comp;
@@ -159,5 +156,4 @@
 		align-items: center;
 		padding: 0px 25px;
 	}
-
 </style>
