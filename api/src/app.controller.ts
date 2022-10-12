@@ -15,4 +15,15 @@ export class AppController {
     return competitions.map(c => { (c as any).results = results.filter(r => r.competition_id === c.id); return c }
     )
   }
+
+  @Get("get_token_info/:contract_name")
+  public async getMarketSummary(@Param() params: { contract_name: string }) {
+    const { contract_name } = params;
+    try {
+      const token_info = this.appService.getTokenInfo(contract_name)
+      return token_info
+    } catch (err) {
+      log.error(err);
+    }
+  }
 }

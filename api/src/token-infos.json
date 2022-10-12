@@ -1,0 +1,26 @@
+{
+  "con_rswp_lst001": {
+    "symbol": "RSWP",
+    "name": "Rocketswap Token",
+    "contract_name": "con_rswp_lst001",
+    "description": "RSWP is the native token of the Rocketswap DEX. It is used to pay fees, give fee discounts, and engage in governance decisions on the rocektswap DAO. A certain amount of RSWP is burned during each trade on the DEX."
+  },
+  "con_reflecttau_v2": {
+    "symbol": "RTAU",
+    "name": "ReflectTAU",
+    "contract_name": "con_reflecttau_v2",
+    "description": "ReflectTAU allows users to earn TAU from holding RTAU in their Lamden wallet. RTAU has a 12% tax on buys and sells which it pays out to holders."
+  },
+  "con_lambdoge": {
+    "symbol": "LDOGE",
+    "name": "LambDoge",
+    "contract_name": "con_lambdoge",
+    "description": "LDOGE is the token for the LambDoge meme project, LambDoge is a community generated story where community members make submissions and vote to chose the best submission. Once the best submission has been chosen, the story is used to create a comic which is distributed as an NFT. All proceeds go back into the project"
+  },
+  "con_lusd_lst001": {
+    "symbol": "LUSD",
+    "name": "Lamden USD",
+    "contract_name": "con_lusd_001",
+    "description": "LUSD is USDC which has been bridged to the Lamden network via the Lamden Link bridge."
+  }
+}

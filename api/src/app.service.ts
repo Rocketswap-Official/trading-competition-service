@@ -64,6 +64,19 @@ export class AppService implements OnModuleInit {
     }
   }
 
+  public async getTokenInfo(contract_name: string) {
+    const path = `./src/token-infos.json`;
+    const all_token_info = await new Promise((resolve, reject) => {
+      fs.readFile(path, (err, data: any) => {
+        if (err) reject(err);
+        else resolve(JSON.parse(data));
+      });
+    }).catch((err) => {
+      log.log(`error loading file !`)
+    });
+    return all_token_info[contract_name]
+  }
+
   async loadCompetitions() {
     log.log(`loading competition data`)
     const path = `./src/competitions.json`;
