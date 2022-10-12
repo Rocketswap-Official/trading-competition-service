@@ -21,7 +21,7 @@
 	</div>
 	{#each $competitions_store as comp}
 		<div class="comp-item">
-			<div class="w-20 t-l"><b>{comp.comp_contract_title}</b></div>
+			<div class="token-symbol w-20 t-l">{comp.comp_contract_title}</div>
 			<div class="w-20 t-l">{getDateFromUnix(comp.date_start_unix)} <br />{getUtcTimeFromUnix(comp.date_start_unix)}</div>
 			<div class="w-20 t-l">{getDateFromUnix(comp.date_end_unix)} <br />{getUtcTimeFromUnix(comp.date_end_unix)}</div>
 			<div class="w-20 t-r">{comp.reward_contract_title} {addCommas(getFullPrize(comp.prizes))}</div>
@@ -44,6 +44,9 @@
 </div>
 
 <style>
+	.token-symbol {
+		font-size: var(--units-1_5vw);
+	}
 	.gradient-button {
 		/* margin: 10px; */
 		/* font-family: "Arial Black", Gadget, sans-serif; */
