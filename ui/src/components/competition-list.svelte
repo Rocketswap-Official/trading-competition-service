@@ -2,44 +2,53 @@
 	import { onMount } from "svelte";
 	import { competitions_store } from "../store";
 	import { addCommas, getDateFromUnix, getFullPrize, getUtcTimeFromUnix } from "../utils/misc.utils";
+	import { gotoPath, openLinkInNewTab } from "../utils/nav.utils";
 
 	onMount(() => {});
 </script>
 
-<div class="main-container">
-	<div class="header">Rocketswap Leaderboard</div>
-	<div class="list-container">
-		<div class="comp-header">
-			<div class="w-20 t-l">Market</div>
-			<div class="w-20 t-l">Start Date</div>
-			<div class="w-20 t-l">End Date</div>
-			<div class="w-20 t-r">Rewards</div>
-		</div>
-		{#each $competitions_store as comp}
-			<div class="comp-item">
-				<div class="w-20 t-l">{comp.comp_contract_title}</div>
-				<div class="w-20 t-l">{getDateFromUnix(comp.date_start_unix)} <br />{getUtcTimeFromUnix(comp.date_start_unix)}</div>
-				<div class="w-20 t-l">{getDateFromUnix(comp.date_end_unix)} <br />{getUtcTimeFromUnix(comp.date_end_unix)}</div>
-				<div class="w-20 t-r">{comp.reward_contract_title} {addCommas(getFullPrize(comp.prizes))}</div>
-				<div class="w-20 t-c button-cont">
-					<a href={`/#/competition/${comp.id}`} class="gradient-button gradient-button-1">More</a>
-					<a
-						href={`https://rocketswap.exchange/#/swap/${comp.comp_contract}`}
-						class="gradient-button gradient-button-1"
-						target="_blank">Trade</a
-					>
-				</div>
-			</div>
-		{/each}
+<div class="list-container fancy-scrollbar">
+	<div class="content">
+		The Rocketswap Leaderboard is a tool that rewards users for the volume of trading they perform on Rocketswap.<br />
+		All users who perform trades on eligble pairs are automatically added to the leaderboard.<br />
+		Rewards are distributed at the end of the period.
 	</div>
+	<div class="comp-header">
+		<div class="w-20 t-l">Market</div>
+		<div class="w-20 t-l">Starts</div>
+		<div class="w-20 t-l">Ends</div>
+		<div class="w-20 t-r">Rewards</div>
+	</div>
+	{#each $competitions_store as comp}
+		<div class="comp-item">
+			<div class="w-20 t-l"><b>{comp.comp_contract_title}</b></div>
+			<div class="w-20 t-l">{getDateFromUnix(comp.date_start_unix)} <br />{getUtcTimeFromUnix(comp.date_start_unix)}</div>
+			<div class="w-20 t-l">{getDateFromUnix(comp.date_end_unix)} <br />{getUtcTimeFromUnix(comp.date_end_unix)}</div>
+			<div class="w-20 t-r">{comp.reward_contract_title} {addCommas(getFullPrize(comp.prizes))}</div>
+			<div class="w-20 t-c button-cont flex col a-end">
+				<button
+					on:click={() => {
+						gotoPath(`/#/competition/${comp.id}`);
+					}}
+					class="gradient-button gradient-button-1">More</button
+				>
+				<button
+					on:click={() => {
+						openLinkInNewTab(`https://rocketswap.exchange/#/swap/${comp.comp_contract}`);
+					}}
+					class="gradient-button gradient-button-1">Trade</button
+				>
+			</div>
+		</div>
+	{/each}
 </div>
 
 <style>
 	.gradient-button {
 		/* margin: 10px; */
 		/* font-family: "Arial Black", Gadget, sans-serif; */
-		font-size: 0.8em;
-		padding: 7px;
+		font-size: var(--units-08vw);
+		/* padding: 7px; */
 		text-align: center;
 		text-transform: uppercase;
 		transition: 0.5s;
@@ -51,7 +60,8 @@
 		transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 		cursor: pointer;
 		display: inline-block;
-		border-radius: 4px;
+		/* border-radius: 4px; */
+		min-width: var(--units-4vw);
 	}
 	.gradient-button:hover {
 		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
@@ -86,7 +96,7 @@
 
 	.comp-header {
 		font-weight: 600;
-		font-size: 1.3em;
+		font-size: var(--units-1_3vw);
 	}
 
 	.comp-item,
@@ -100,17 +110,14 @@
 		-moz-box-sizing: border-box;
 		-webkit-box-sizing: border-box;
 	}
-	.list-container {
-		margin-top: 40px;
-		width: 100%;
+
+	.comp-item {
+		font-size: var(--units-1vw);
 	}
-	.header {
+
+	.list-container {
+		margin-top: 10px;
 		width: 100%;
-		height: 70px;
-		font-size: 1.5rem;
-		text-align: left;
-		display: flex;
-		align-items: center;
-		padding: 0px 25px;
+		/* margin-bottom: 50px; */
 	}
 </style>
