@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+.chk-container{
+    position: relative;
+}
+
+.chk-container input {
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    transition: 0.5s border ease-in-out;
+    position: absolute;
+}
+
+.chk-container > span {
+    margin-right: var(--units-1vw);
+}
+
+.chk-checkmark {
+    position: relative;
+    margin-left:  var(--units-01vw);
+    height: var(--units-1_7vw);
+    width:  var(--units-1_7vw);
+    border: var(--units-015vw) solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.chk-container:hover input~.chk-checkmark {
+    filter: brightness(125%);
+}
+
+.chk-container input:checked~.chk-checkmark {
+    background-color: var(--checkbox-bg);
+}
+
+.chk-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.chk-container input:disabled~.chk-checkmark {
+    background-color: var(--panel-background-highlight);
+}
+
+.chk-container input:checked~.chk-checkmark:after {
+    display: block;
+}
+
+.chk-container .chk-checkmark:after {
+    position: relative;
+    left: var(--units-06vw);
+    top: var(--units-025vw);
+    width: var(--units-03vw);
+    height: var(--units-07vw);
+    border: solid var(--primary-color);
+    border-radius: var(--units-011vw);
+    border-width: 0 var(--units-02vw) var(--units-0208vw) 0;
+    -webkit-transform: rotate(49deg);
+    -ms-transform: rotate(49deg);
+    transform: rotate(49deg);
+}
+
+select{
+    padding: var(--units-06vw) var(--units-1_5vw);
+    border: var(--units-01vw) solid var(--panel-background-color);
+    border-radius: var(--units-05vw);
+    font-size: var(--font-size-1_2);
+    font-weight: 200;
+
+    -moz-appearance: none;
+    -webkit-appearance: none;
+}
+
+select > option{
+    padding: 0;
+    min-height: unset;
+    white-space: unset;
+    font-weight: 200;
+}
+
+
+/* For IE10 */
+select::-ms-expand {
+    display: none;
+}
+
+input.primary_input{
+    padding: 6px 10px;
+    font-size: var(--font-size-1_2);
+    background: var(--panel-background-color);
+    color: var(--font-primary-color);
+    border: none;
+    box-shadow: var(--panel-box-shadow);
+}
+input.number-input{
+    background-color: var(--panel-background-color);
+    border: 1px solid var(--font-primary-color-dark);
+    border-radius: var(--units-06vw);
+    padding: var(--units-06vw) var(--units-3vw) var(--units-06vw) var(--units-06vw);
+    font-size: var(--units-1_5vw);
+    color: var(--font-primary-color);
+    box-sizing: border-box;
+}
+
+/* The switch - the box around the slider */
+.switch{
+    display: flex;
+    align-items: center;
+    font-size: var(--units-1_2vw);
+    font-weight: 300;
+}
+
+.switch > label {
+    position: relative;
+    display: inline-block;
+    width: var(--units-4vw);
+    height: var(--units-2vw);
+    margin-left: var(--units-1vw);
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch  > label input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: var(--units-2vw);
+    width: var(--units-2vw);
+    left: 0;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .switch > label > input:checked + .slider {
+    background-color: var(--primary-color-dim);
+  }
+  
+  .switch > label > input:focus + .slider {
+    box-shadow: 0 0 1px var(--primary-color-dim);
+  }
+  
+  .switch > label > input:checked + .slider:before {
+    -webkit-transform: translateX(var(--units-2vw));
+    -ms-transform: translateX(var(--units-2vw));
+    transform: translateX(var(--units-2vw));
+    background-color: var(--primary-color);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: var(--units-1vw);
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  .fancy-scrollbar {
+    /* Foreground, Background */
+    scrollbar-color: var(--primary-color) var(--panel-background-color);
+  }
+  .fancy-scrollbar::-webkit-scrollbar {
+    width: var(--units-08vw); /* Mostly for vertical scrollbars */
+    height: var(--units-08vw); /* Mostly for horizontal scrollbars */
+  }
+  .fancy-scrollbar::-webkit-scrollbar-thumb { /* Foreground */
+    background: var(--primary-color);
+    border-radius: 1vw;
+  }
+  .fancy-scrollbar::-webkit-scrollbar-track { /* Background */
+    background: var(--panel-background-color);
+    border-radius: 1vw;
+  }
+
+@media (max-width: 480px) {
+   
+}

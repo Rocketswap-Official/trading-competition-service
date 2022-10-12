@@ -1,0 +1,753 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+	font-family: 'Poppins', Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+	--unit-base-1vw: 7.69px;
+
+	--breakpoint-multiplier: 0.8;
+
+		--units-005vw: calc(0.05vw * var(--breakpoint-multiplier));
+		--units-008vw: calc(0.08vw * var(--breakpoint-multiplier));
+		--units-009vw: calc(0.09vw * var(--breakpoint-multiplier));
+		--units-01vw: calc(0.1vw * var(--breakpoint-multiplier));
+		--units-011vw: calc(0.11vw * var(--breakpoint-multiplier));
+		--units-015vw: calc(0.15vw * var(--breakpoint-multiplier));
+		--units-016vw: calc(0.16vw * var(--breakpoint-multiplier));
+		--units-02vw: calc(0.2vw * var(--breakpoint-multiplier));
+		--units-0208vw: calc(0.208vw * var(--breakpoint-multiplier));
+		--units-025vw: calc(0.25vw * var(--breakpoint-multiplier));
+		--units-03vw: calc(0.3vw * var(--breakpoint-multiplier));
+		--units-04vw: calc(0.4vw * var(--breakpoint-multiplier));
+		--units-045vw: calc(0.45vw * var(--breakpoint-multiplier));
+		--units-05vw: calc(0.5vw * var(--breakpoint-multiplier));
+		--units-06vw: calc(0.6vw * var(--breakpoint-multiplier));
+		--units-065vw: calc(0.65vw * var(--breakpoint-multiplier));
+		--units-07vw: calc(0.7vw * var(--breakpoint-multiplier));
+		--units-072vw: calc(0.72vw * var(--breakpoint-multiplier));
+		--units-08vw: calc(0.8vw * var(--breakpoint-multiplier));
+		--units-09vw: calc(0.9vw * var(--breakpoint-multiplier));
+		--units-1vw: calc(1vw * var(--breakpoint-multiplier));
+		--units-1_1vw: calc(1.1vw * var(--breakpoint-multiplier));
+		--units-1_14vw: calc(1.14vw * var(--breakpoint-multiplier));
+		--units-1_15vw: calc(1.15vw * var(--breakpoint-multiplier));
+		--units-1_16vw: calc(1.16vw * var(--breakpoint-multiplier));
+		--units-1_1625vw: calc(1.1625vw * var(--breakpoint-multiplier));
+		--units-1_2vw: calc(1.2vw * var(--breakpoint-multiplier));
+		--units-1_25vw: calc(1.25vw * var(--breakpoint-multiplier));
+		--units-1_3vw: calc(1.3vw * var(--breakpoint-multiplier));
+		--units-1_4vw: calc(1.4vw * var(--breakpoint-multiplier));
+		--units-1_5vw: calc(1.5vw * var(--breakpoint-multiplier));
+		--units-1_6vw: calc(1.6vw * var(--breakpoint-multiplier));
+		--units-1_7vw: calc(1.7vw * var(--breakpoint-multiplier));
+		--units-1_8vw: calc(1.8vw * var(--breakpoint-multiplier));
+		--units-1_9vw: calc(1.9vw * var(--breakpoint-multiplier));
+		--units-2vw: calc(2vw * var(--breakpoint-multiplier));
+		--units-2_1vw: calc(2.1vw * var(--breakpoint-multiplier));
+		--units-2_2vw: calc(2.2vw * var(--breakpoint-multiplier));
+		--units-2_3vw: calc(2.3vw * var(--breakpoint-multiplier));
+		--units-2_5vw: calc(2.5vw * var(--breakpoint-multiplier));
+		--units-3vw: calc(3vw * var(--breakpoint-multiplier));
+		--units-3_1vw: calc(3.1vw * var(--breakpoint-multiplier));
+		--units-3_2vw: calc(3.2vw * var(--breakpoint-multiplier));
+		--units-3_6vw: calc(3.6vw * var(--breakpoint-multiplier));
+		--units-4vw: calc(4vw * var(--breakpoint-multiplier));
+		--units-4_2vw: calc(4.2vw * var(--breakpoint-multiplier));
+		--units-4_5vw: calc(4.5vw * var(--breakpoint-multiplier));
+		--units-4_6vw: calc(4.6vw * var(--breakpoint-multiplier));
+		--units-4_7vw: calc(4.7vw * var(--breakpoint-multiplier));
+		--units-5vw: calc(5vw * var(--breakpoint-multiplier));
+		--units-5_5vw: calc(5.5vw * var(--breakpoint-multiplier));
+		--units-6vw: calc(6vw * var(--breakpoint-multiplier));
+		--units-8vw: calc(8vw * var(--breakpoint-multiplier));
+		--units-9vw: calc(9vw * var(--breakpoint-multiplier));
+		--units-10vw: calc(10vw * var(--breakpoint-multiplier));
+		--units-11vw: calc(11vw * var(--breakpoint-multiplier));
+		--units-11_5vw: calc(11.5vw * var(--breakpoint-multiplier));
+		--units-15vw: calc(15vw * var(--breakpoint-multiplier));
+		--units-17_2vw: calc(17.2vw * var(--breakpoint-multiplier));
+		--units-19vw: calc(19vw * var(--breakpoint-multiplier));
+		--units-22vw: calc(22vw * var(--breakpoint-multiplier));
+		--units-22vw: calc(25vw * var(--breakpoint-multiplier));
+		--units-29vw: calc(29vw * var(--breakpoint-multiplier));
+		--units-30vw: calc(30vw * var(--breakpoint-multiplier));
+		--units-34vw: calc(34vw * var(--breakpoint-multiplier));
+		--units-37vw: calc(37vw * var(--breakpoint-multiplier));
+
+	--primary-gradient: linear-gradient(95.08deg, #C5FFAA 2.49%, #00BAC6 97.19%);
+	--primary-gradient-webkit: -webkit-linear-gradient(95.08deg, #C5FFAA 2.49%, #00BAC6 97.19%);
+	--secondary-gradient: linear-gradient(95.08deg, #CF69FC 2.49%, #AF05FA 48.36%, #8C04C8 97.19%);
+	--secondary-gradient-webkit: linear-gradient(95.08deg, #CF69FC 2.49%, #AF05FA 48.36%, #8C04C8 97.19%);
+
+	--pure-white: #ffffff;
+	--primary-color: #24FFBD;
+	--primary-color-dim: #18ab7f;
+	--secondary-color: #A128FD;
+	--tertiary-color: #edf0f8;
+	--accent-color: #ff3e00;
+	--red-color: #ea4c1c;
+	--green-color: #24ffbd;
+
+	--background-color: #0E1621;
+
+	--panel-background-color: #1B2734;
+	--panel-background-highlight: #27384a;
+	--panel-background-highlighter: #908e8e;
+
+	--panel-border-radius: var(--units-1vw);
+
+	--panel-box-shadow-higher: 0px var(--units-07vw) var(--units-08vw) 0 rgba(0, 0, 0, 30%);
+	--panel-box-shadow-high: 0 var(--units-01vw) var(--units-3vw) 0 rgb(0 0 0 / 40%);
+	--panel-box-shadow: 0 var(--units-01vw) var(--units-3vw) 0 rgb(0 0 0 / 20%);
+	--panel-box-shadow-shallow: 0 var(--units-01vw) var(--units-1vw) 0 rgb(0 0 0 / 20%);
+
+	--modal-bg-overlay: #0e1621d1;
+
+	--font-primary-color: #eaeaea;
+	--font-primary-color-dark: #908e8e;
+
+	--table-divider-color: #0E1621;
+
+	--checkbox-the-checkmark: var(--primary-color);
+    --checkbox-border: var(--primary-gradient);
+    --checkbox-bg: transparent;
+}
+
+html{
+	width: 100%;
+}
+
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+body {
+	overflow-y: scroll;
+	width: 100%;
+	min-height: 100vh;
+	margin: 0;
+	background-color: var(--background-color);
+	color: var(--font-primary-color);
+	font-style: normal;
+	font-weight: 200;
+	font-size: var(--units-08vw);
+
+	-webkit-overflow-scrolling: touch;
+}
+
+.height-inherit{
+	height: inherit;
+}
+
+.mobile{
+	display: none!important;
+}
+
+select, button{
+	font-family: 'Poppins', Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#svelte {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+h2{
+	font-weight: 300;
+	font-size: var(--units-1_5vw);	
+}
+
+h3{
+	font-size: var(--units-1vw);
+	font-weight: 300;
+}
+
+a:visited{
+	color: var(--font-primary-color);
+}
+
+.text-primary-color{
+	color: var(--primary-color);
+}
+.text-primary-color-dark{
+	color: var(--font-primary-color-dark);
+}
+
+.text-red{
+	color: var(--red-color);
+}
+
+.text-green{
+	color: var(--green-color);
+}
+
+.text-gradient-primary{
+	background: var(--primary-gradient);
+	background-clip: text;
+	background: var(--primary-gradient-webkit);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+a {
+	color: var(--font-primary-color);
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+}
+
+a.link-primary{
+	color: var(--primary-color);
+}
+
+a.link-primary:visited{
+	color: var(--primary-color);
+}
+
+a.link-primary:hover{
+	color: var(--primary-color-dim);
+}
+
+a.link-primary.disabled{
+	color: var(--primary-color-dim);
+	pointer-events: none;
+}
+
+a.link-primary.disabled:hover{
+	text-decoration: none;
+}
+
+table{
+	background-color: var(--panel-background-color);
+	width: 100%;
+	font-weight:200;
+	font-size: var(--units-1_16vw);
+	border-spacing: 0;
+	border-radius: var(--units-07vw);
+    padding: var(--units-07vw) 0 var(--units-2_5vw);
+	box-shadow: var(--panel-box-shadow);
+
+}
+
+th{
+    padding: var(--units-05vw) 0 var(--units-1_2vw) var(--units-2vw);
+	white-space: nowrap;
+}
+
+td{
+    padding: var(--units-05vw) 0 var(--units-05vw) var(--units-2vw);
+	white-space: nowrap;
+}
+
+tr > td:last-child {
+	padding-right: var(--units-1vw);
+}
+
+tr > th:last-child {
+	padding-right: var(--units-1vw);
+}
+
+table, th, td {
+	text-align: left;
+}
+table, td, th{
+	font-weight: 300;
+}
+table, th {
+	border-bottom: 1px solid var(--table-divider-color);
+
+}
+button{
+	border: unset;
+}
+
+button.void{
+	background-color: transparent;
+	border: none;
+	border-radius: var(--units-05vw);
+	padding: var(--units-1vw);
+	color: var(--font-primary-color)
+}
+
+button:not([disabled]).void:hover{
+	background-color: var(--panel-background-highlight);
+	filter: brightness(110%)
+}
+
+button.icon{
+	background-color: transparent;
+	border: none;
+	padding: 0;
+	height: -webkit-fill-available;
+	cursor: pointer;
+}
+.modal > button.icon{
+	height: fit-content;
+}
+
+button.white{
+	color: var(--font-primary-color);
+}
+
+button.primary-color{
+	color: var(--primary-color);
+}
+
+button.outlined{
+	border: none;
+	border-radius: var(--units-07vw);
+	font-weight: 500;
+    font-size: var(--units-1_14vw);
+	padding: var(--units-016vw);
+	background: var(--primary-gradient);
+}
+
+button.outlined > div{
+	border-radius: var(--units-065vw);
+    background: var(--panel-background-color);
+    padding: var(--units-06vw) var(--units-3_6vw);
+	cursor: pointer;
+}
+
+button.outlined:not([disabled]) > div:hover{
+	background-color: var(--panel-background-highlight);
+	filter: brightness(110%)
+}
+
+button.outlined.primary > div{
+	background: var(--secondary-gradient);
+	background: var(--secondary-gradient-webkit);
+}
+
+button:disabled{
+	filter: contrast(50%);
+}
+
+button.skinny > div{
+	padding: var(--units-005vw) var(--units-1_8vw);
+}
+
+button:not([disabled]):not(.text):active{
+	position: relative;
+	top: var(--units-01vw);
+}
+
+button.text{
+	background-color: transparent;
+	border: none;
+	padding: 0;
+    font-size: var(--units-1_15vw);
+    font-weight: 500;
+	line-height: var(--units-3vw);
+	letter-spacing: 0em;
+	cursor: pointer;	
+}
+
+button.text:hover{
+	text-decoration: underline;
+}
+
+.cell-token-name > img.token-logo{
+	width: var(--units-2_5vw);
+	margin-right: var(--units-2vw);
+}
+.cell-token-name > img.verified{
+	width: var(--units-1_5vw);
+	margin-left: var(--units-1vw);
+}
+.cell-token-name > img.chart{
+	width: var(--units-6vw);
+}
+.cell-token-name > div{
+	color: var(--font-primary-color-dark);
+	margin-left: var(--units-1vw);
+}
+
+.panel{
+	box-sizing: border-box;
+	border-radius: var(--panel-border-radius);
+	background-color: var(--panel-background-color);
+}
+
+.page-heading{
+	margin-bottom: var(--units-1vw);
+}
+
+.page-heading > img.verified_help{
+	margin-left: var(--units-1vw);
+	width: var(--units-1_6vw);
+	cursor: pointer;
+}
+
+img.dropdown-arrow{
+	margin-right: var(--units-1vw);
+	animation: 5s;
+	width: var(--units-1_5vw);
+}
+img.dropdown-arrow.open{
+	transform: rotateX(180deg);
+}
+img.sort-arrow{
+	width: var(--units-1vw);
+	transform: rotateX(180deg);
+}
+img.sort-arrow.flip{
+	transform: rotateX(0deg);
+}
+
+.panel-page{
+	width: fit-content;
+	margin: 0 auto;
+}
+
+.modal-content{
+	height: 100%;
+}
+
+.modal-content > h2{
+	align-self: flex-start;
+	margin-bottom: var(--units-2vw);
+}
+
+.modal-content-confirm{
+	margin: 0 auto;
+	font-size: var(--units-1_1vw);
+	height: 100%;
+}
+.modal-content > img.hero{
+	width: var(--units-8vw);
+}
+.modal-content > .text-box{
+	font-size: var(--units-1_2vw);
+    width: 100%;
+}
+
+.modal-message{
+	text-align: center;
+    margin: var(--units-2vw);
+}
+.modal-highlight-box{
+	width: fit-content;
+	font-weight: 300;
+	font-size: var(--units-1_4vw);
+	margin: 0 auto var(--units-2vw);
+}
+.modal-highlight-box > div {
+	margin-bottom: var(--units-1vw);
+}
+.modal-details > p {
+	margin-top: 0;
+	margin-bottom: 0;
+	margin-right: var(--units-1vw);
+}
+.modal-details{
+	width: max-content;
+	width: 100%;
+	text-align: center;
+}
+.modal-heading{
+	text-align: left;
+	margin-bottom: var(--units-2vw);
+}
+
+.modal-buttons{
+	display: flex;
+	justify-content: center;
+	margin-top: var(--units-3vw);
+	width: 100%;
+}
+
+.modal-buttons > button{
+	min-width: var(--units-15vw);
+	margin-left: var(--units-05vw);
+	margin-right: var(--units-05vw);
+	margin-bottom: 2vh;
+}
+
+.modal-buttons > button > div{
+	padding-left: var(--units-1vw);
+	padding-right: var(--units-1vw);
+}
+
+@media (max-width: 1920px) {
+	:root{
+		--units-005vw: 0.05vw;
+		--units-008vw: 0.08vw;
+		--units-009vw: 0.09vw;
+		--units-01vw: 0.1vw;
+		--units-011vw: 0.11vw;
+		--units-015vw: 0.15vw;
+		--units-016vw: 0.16vw;
+		--units-02vw: 0.2vw;
+		--units-0208vw: 0.208vw;
+		--units-025vw: 0.25vw;
+		--units-03vw: 0.3vw;
+		--units-04vw: 0.4vw;
+		--units-045vw: 0.45vw;
+		--units-05vw: 0.5vw;
+		--units-06vw: 0.6vw;
+		--units-065vw: 0.65vw;
+		--units-07vw:0.7vw;
+		--units-072vw:0.72vw;
+		--units-08vw: 0.8vw;
+		--units-09vw: 0.9vw;
+		--units-1vw: 1vw;
+		--units-1_1vw: 1.1vw;
+		--units-1_14vw: 1.14vw;
+		--units-1_15vw: 1.15vw;
+		--units-1_16vw: 1.16vw;
+		--units-1_1625vw: 1.1625vw;
+		--units-1_2vw: 1.2vw;
+		--units-1_25vw: 1.25vw;
+		--units-1_3vw: 1.3vw;
+		--units-1_4vw: 1.4vw;
+		--units-1_5vw: 1.5vw;
+		--units-1_6vw: 1.6vw;
+		--units-1_7vw: 1.7vw;
+		--units-1_8vw: 1.8vw;
+		--units-1_9vw: 1.9vw;
+		--units-2vw: 2vw;
+		--units-2_1vw: 2.1vw;
+		--units-2_2vw: 2.2vw;
+		--units-2_3vw: 2.3vw;
+		--units-2_5vw: 2.5vw;
+		--units-3vw: 3vw;
+		--units-3_1vw: 3.1vw;
+		--units-3_2vw: 3.2vw;
+		--units-3_6vw: 3.6vw;
+		--units-4vw: 4vw;
+		--units-4_2vw: 4.2vw;
+		--units-4_5vw: 4.5vw;
+		--units-4_6vw: 4.6vw;
+		--units-4_7vw: 4.7vw;
+		--units-5vw: 5vw;
+		--units-5_5vw: 5.5vw;
+		--units-6vw: 6vw;
+		--units-8vw: 8vw;
+		--units-9vw: 9vw;
+		--units-10vw: 10vw;
+		--units-11vw: 11vw;
+		--units-11_5vw: 11.5vw;
+		--units-15vw: 15vw;
+		--units-17_2vw: 17.2vw;
+		--units-19vw: 19vw;
+		--units-22vw: 22vw;
+		--units-22vw: 25vw;
+		--units-29vw: 29vw;
+		--units-30vw: 30vw;
+		--units-34vw: 34vw;
+		--units-37vw: 37vw;
+	}
+}
+
+@media (max-width: 768px) {
+	:root{
+		--font-size-1_2: 10.584px;
+
+		--units-005vw: calc(var(--unit-base-1vw) * 0.05);
+		--units-008vw: calc(var(--unit-base-1vw) * 0.08);
+		--units-009vw: calc(var(--unit-base-1vw) * 0.09);
+		--units-01vw: calc(var(--unit-base-1vw) * 0.1);
+		--units-011vw: calc(var(--unit-base-1vw) * 0.11);
+		--units-015vw: calc(var(--unit-base-1vw) * 0.15);
+		--units-016vw: calc(var(--unit-base-1vw) * 0.16);
+		--units-02vw: calc(var(--unit-base-1vw) * 0.2);
+		--units-0208vw: calc(var(--unit-base-1vw) * 0.208);
+		--units-025vw: calc(var(--unit-base-1vw) * 0.25);
+		--units-03vw: calc(var(--unit-base-1vw) * 0.3);
+		--units-04vw: calc(var(--unit-base-1vw) * 0.4);
+		--units-045vw: calc(var(--unit-base-1vw) * 0.45);
+		--units-05vw: calc(var(--unit-base-1vw) * 0.5);
+		--units-06vw: calc(var(--unit-base-1vw) * 0.6);
+		--units-065vw: calc(var(--unit-base-1vw) * 0.65);
+		--units-07vw:calc(var(--unit-base-1vw) * 0.7);
+		--units-072vw:calc(var(--unit-base-1vw) * 0.72);
+		--units-08vw: calc(var(--unit-base-1vw) * 0.8);
+		--units-09vw: calc(var(--unit-base-1vw) * 0.9);
+		--units-1vw: calc(var(--unit-base-1vw) * 1);
+		--units-1_1vw: calc(var(--unit-base-1vw) * 1.1);
+		--units-1_14vw: calc(var(--unit-base-1vw) * 1.14);
+		--units-1_15vw: calc(var(--unit-base-1vw) * 1.15);
+		--units-1_16vw: calc(var(--unit-base-1vw) * 1.16);
+		--units-1_1625vw: calc(var(--unit-base-1vw) * 1.1625);
+		--units-1_2vw: calc(var(--unit-base-1vw) * 1.2);
+		--units-1_25vw: calc(var(--unit-base-1vw) * 1.25);
+		--units-1_3vw: calc(var(--unit-base-1vw) * 1.3);
+		--units-1_4vw: calc(var(--unit-base-1vw) * 1.4);
+		--units-1_5vw: calc(var(--unit-base-1vw) * 1.5);
+		--units-1_6vw: calc(var(--unit-base-1vw) * 1.6);
+		--units-1_7vw: calc(var(--unit-base-1vw) * 1.7);
+		--units-1_8vw: calc(var(--unit-base-1vw) * 1.8);
+		--units-1_9vw: calc(var(--unit-base-1vw) * 1.9);
+		--units-2vw: calc(var(--unit-base-1vw) * 2);
+		--units-2_1vw: calc(var(--unit-base-1vw) * 2.1);
+		--units-2_2vw: calc(var(--unit-base-1vw) * 2.2);
+		--units-2_3vw: calc(var(--unit-base-1vw) * 2.3);
+		--units-2_5vw: calc(var(--unit-base-1vw) * 2.5);
+		--units-3vw: calc(var(--unit-base-1vw) * 3);
+		--units-3_1vw: calc(var(--unit-base-1vw) * 3.1);
+		--units-3_2vw: calc(var(--unit-base-1vw) * 3.2);
+		--units-3_6vw: calc(var(--unit-base-1vw) * 3.6);
+		--units-4vw: calc(var(--unit-base-1vw) * 4);
+		--units-4_2vw: calc(var(--unit-base-1vw) * 4.2);
+		--units-4_5vw: calc(var(--unit-base-1vw) * 4.5);
+		--units-4_6vw: calc(var(--unit-base-1vw) * 4.6);
+		--units-4_7vw: calc(var(--unit-base-1vw) * 4.7);
+		--units-5vw: calc(var(--unit-base-1vw) * 5);
+		--units-5_5vw: calc(var(--unit-base-1vw) * 5.5);
+		--units-6vw: calc(var(--unit-base-1vw) * 6);
+		--units-8vw: calc(var(--unit-base-1vw) * 8);
+		--units-9vw: calc(var(--unit-base-1vw) * 9);
+		--units-10vw: calc(var(--unit-base-1vw) * 10);
+		--units-11vw: calc(var(--unit-base-1vw) * 11);
+		--units-11_5vw: calc(var(--unit-base-1vw) * 11.5);
+		--units-15vw: calc(var(--unit-base-1vw) * 15);
+		--units-17_2vw: calc(var(--unit-base-1vw) * 17);
+		--units-19vw: calc(var(--unit-base-1vw) * 19);
+		--units-22vw: calc(var(--unit-base-1vw) * 22);
+		--units-25vw: calc(var(--unit-base-1vw) * 25);
+		--units-29vw: calc(var(--unit-base-1vw) * 29);
+		--units-45vw: calc(var(--unit-base-1vw) * 30);
+		--units-34vw: calc(var(--unit-base-1vw) * 34);
+		--units-37vw: calc(var(--unit-base-1vw) * 37);
+
+	}
+	body {
+		overflow-x: hidden;
+	}
+	table{
+		width: 653.656px;
+	}
+	.table-wrapper{
+		overflow-x: scroll;
+	}
+}
+
+
+
+@media (max-width: 480px) {
+	:root{
+		--breakpoint-multiplier: 1.7;
+		--units-005vw: calc(var(--unit-base-1vw) * 0.05 * var(--breakpoint-multiplier));
+		--units-008vw: calc(var(--unit-base-1vw) * 0.08 * var(--breakpoint-multiplier));
+		--units-009vw: calc(var(--unit-base-1vw) * 0.09 * var(--breakpoint-multiplier));
+		--units-01vw: calc(var(--unit-base-1vw) * 0.1 * var(--breakpoint-multiplier));
+		--units-011vw: calc(var(--unit-base-1vw) * 0.11 * var(--breakpoint-multiplier));
+		--units-015vw: calc(var(--unit-base-1vw) * 0.15 * var(--breakpoint-multiplier));
+		--units-016vw: calc(var(--unit-base-1vw) * 0.16 * var(--breakpoint-multiplier));
+		--units-02vw: calc(var(--unit-base-1vw) * 0.2 * var(--breakpoint-multiplier));
+		--units-0208vw: calc(var(--unit-base-1vw) * 0.208 * var(--breakpoint-multiplier));
+		--units-025vw: calc(var(--unit-base-1vw) * 0.25 * var(--breakpoint-multiplier));
+		--units-03vw: calc(var(--unit-base-1vw) * 0.3 * var(--breakpoint-multiplier));
+		--units-04vw: calc(var(--unit-base-1vw) * 0.4 * var(--breakpoint-multiplier));
+		--units-045vw: calc(var(--unit-base-1vw) * 0.45 * var(--breakpoint-multiplier));
+		--units-05vw: calc(var(--unit-base-1vw) * 0.5 * var(--breakpoint-multiplier));
+		--units-06vw: calc(var(--unit-base-1vw) * 0.6 * var(--breakpoint-multiplier));
+		--units-065vw: calc(var(--unit-base-1vw) * 0.65 * var(--breakpoint-multiplier));
+		--units-07vw:calc(var(--unit-base-1vw) * 0.7 * var(--breakpoint-multiplier));
+		--units-072vw:calc(var(--unit-base-1vw) * 0.72 * var(--breakpoint-multiplier));
+		--units-08vw: calc(var(--unit-base-1vw) * 0.8 * var(--breakpoint-multiplier));
+		--units-09vw: calc(var(--unit-base-1vw) * 0.9 * var(--breakpoint-multiplier));
+		--units-1vw: calc(var(--unit-base-1vw) * 1 * var(--breakpoint-multiplier));
+		--units-1_1vw: calc(var(--unit-base-1vw) * 1.1 * var(--breakpoint-multiplier));
+		--units-1_14vw: calc(var(--unit-base-1vw) * 1.14 * var(--breakpoint-multiplier));
+		--units-1_15vw: calc(var(--unit-base-1vw) * 1.15 * var(--breakpoint-multiplier));
+		--units-1_16vw: calc(var(--unit-base-1vw) * 1.16 * var(--breakpoint-multiplier));
+		--units-1_1625vw: calc(var(--unit-base-1vw) * 1.1625 * var(--breakpoint-multiplier));
+		--units-1_2vw: calc(var(--unit-base-1vw) * 1.2 * var(--breakpoint-multiplier));
+		--units-1_25vw: calc(var(--unit-base-1vw) * 1.25 * var(--breakpoint-multiplier));
+		--units-1_3vw: calc(var(--unit-base-1vw) * 1.3 * var(--breakpoint-multiplier));
+		--units-1_4vw: calc(var(--unit-base-1vw) * 1.4 * var(--breakpoint-multiplier));
+		--units-1_5vw: calc(var(--unit-base-1vw) * 1.5 * var(--breakpoint-multiplier));
+		--units-1_6vw: calc(var(--unit-base-1vw) * 1.6 * var(--breakpoint-multiplier));
+		--units-1_7vw: calc(var(--unit-base-1vw) * 1.7 * var(--breakpoint-multiplier));
+		--units-1_8vw: calc(var(--unit-base-1vw) * 1.8 * var(--breakpoint-multiplier));
+		--units-1_9vw: calc(var(--unit-base-1vw) * 1.9 * var(--breakpoint-multiplier));
+		--units-2vw: calc(var(--unit-base-1vw) * 2 * var(--breakpoint-multiplier));
+		--units-2_1vw: calc(var(--unit-base-1vw) * 2.1 * var(--breakpoint-multiplier));
+		--units-2_2vw: calc(var(--unit-base-1vw) * 2.2 * var(--breakpoint-multiplier));
+		--units-2_3vw: calc(var(--unit-base-1vw) * 2.3 * var(--breakpoint-multiplier));
+		--units-2_5vw: calc(var(--unit-base-1vw) * 2.5 * var(--breakpoint-multiplier));
+		--units-3vw: calc(var(--unit-base-1vw) * 3 * var(--breakpoint-multiplier));
+		--units-3_1vw: calc(var(--unit-base-1vw) * 3.1 * var(--breakpoint-multiplier));
+		--units-3_2vw: calc(var(--unit-base-1vw) * 3.2 * var(--breakpoint-multiplier));
+		--units-3_6vw: calc(var(--unit-base-1vw) * 3.6 * var(--breakpoint-multiplier));
+		--units-4vw: calc(var(--unit-base-1vw) * 4 * var(--breakpoint-multiplier));
+		--units-4_2vw: calc(var(--unit-base-1vw) * 4.2 * var(--breakpoint-multiplier));
+		--units-4_5vw: calc(var(--unit-base-1vw) * 4.5 * var(--breakpoint-multiplier));
+		--units-4_6vw: calc(var(--unit-base-1vw) * 4.6 * var(--breakpoint-multiplier));
+		--units-4_7vw: calc(var(--unit-base-1vw) * 4.7 * var(--breakpoint-multiplier));
+		--units-5vw: calc(var(--unit-base-1vw) * 5 * var(--breakpoint-multiplier));
+		--units-5_5vw: calc(var(--unit-base-1vw) * 5.5 * var(--breakpoint-multiplier));
+		--units-6vw: calc(var(--unit-base-1vw) * 6 * var(--breakpoint-multiplier));
+		--units-8vw: calc(var(--unit-base-1vw) * 8 * var(--breakpoint-multiplier));
+		--units-9vw: calc(var(--unit-base-1vw) * 9 * var(--breakpoint-multiplier));
+		--units-10vw: calc(var(--unit-base-1vw) * 10 * var(--breakpoint-multiplier));
+		--units-11vw: calc(var(--unit-base-1vw) * 11 * var(--breakpoint-multiplier));
+		--units-11_5vw: calc(var(--unit-base-1vw) * 11.5 * var(--breakpoint-multiplier));
+		--units-15vw: calc(var(--unit-base-1vw) * 15 * var(--breakpoint-multiplier));
+		--units-17_2vw: calc(var(--unit-base-1vw) * 17.2 * var(--breakpoint-multiplier));
+		--units-19vw: calc(var(--unit-base-1vw) * 19 * var(--breakpoint-multiplier));
+		--units-22vw: calc(var(--unit-base-1vw) * 22 * var(--breakpoint-multiplier));
+		--units-25vw: calc(var(--unit-base-1vw) * 25 * var(--breakpoint-multiplier));
+		--units-29vw: calc(var(--unit-base-1vw) * 29 * var(--breakpoint-multiplier));
+		--units-30vw: calc(var(--unit-base-1vw) * 30 * var(--breakpoint-multiplier));
+		--units-34vw: calc(var(--unit-base-1vw) * 34 * var(--breakpoint-multiplier));
+		--units-37vw: calc(var(--unit-base-1vw) * 37 * var(--breakpoint-multiplier));
+
+
+	}
+	h2{
+		font-weight: 400;
+	}
+	.mobile{
+		display: block!important;
+	}
+	.mobile-flex{
+		display: flex!important;
+	}
+	.desktop{
+		display: none!important;
+	}
+	.modal-heading{
+		font-size: var(--units-2vw);
+	}
+
+	.modal-content{
+		overflow-y: scroll;
+	}
+
+	.modal-content-confirm{
+		margin: 0;
+		width: 100%;
+		font-size: var(--units-1_4vw);
+		display: flex;
+		flex-direction: column;
+		overflow-y: scroll;
+	}
+	.modal-content > img.hero{
+		width: 9vh;
+	}
+	.modal-content > .text-box{
+		font-size: 2vh;
+	}
+	.modal-buttons{
+		flex-grow: 1;
+		flex-direction: column;
+		justify-content: flex-end;
+		margin-bottom: 0;
+	}
+	.modal-buttons > button{
+		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
