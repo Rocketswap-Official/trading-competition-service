@@ -3,15 +3,10 @@ export const config_prod = {
     amm_contract: "con_rocketswap_official_v1_1",
     amm_native_token: "con_rswp_lst001",
     network_type: "mainnet",
-    block_service_urls: process.env.block_service_urls?.split(",") || ["165.22.47.195:3535"],
+    block_service_urls: process.env.block_service_urls?.split(",") || ["0.0.0.0:3535"],
     starting_tx_id: "000001044563.00000.00000",
     frequency: 10000
 };
-
-/**
- * The candle resolutions we want to create
- */
-
 
 export const getConfig = () => config_prod
 
