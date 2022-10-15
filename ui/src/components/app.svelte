@@ -88,6 +88,14 @@
 		}
 
 		#powered {
+			/* width: 100%;
+			position: relative;
+			bottom: 60px;
+			right: unset;
+			text-align: center;
+			display: flex;
+			align-items: center;
+			justify-content: center; */
 			position: absolute;
 			bottom: 20px;
 			right: 50px;
@@ -110,5 +118,7 @@
 			-moz-box-sizing: border-box;
 			-webkit-box-sizing: border-box;
 		}
+
+
 	}
 </style>

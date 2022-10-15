@@ -53,6 +53,10 @@
 			<div class="button-cont">
 				<a href={`/#/`} class="circle-button gradient-button-1"><img src="icon-back.svg" alt="" /></a>
 			</div>
+		{:else}
+			<div class="button-cont flex align-center">
+				<img class="logo" src="rswp-logo.svg" alt="" />
+			</div>
 		{/if}
 	</div>
 	<div class="header-title flex row align-center space-between grow-1">
@@ -75,6 +79,13 @@
 </div>
 
 <style>
+
+	.logo {
+		margin-left: var(--units-1_5vw);
+		margin-top: var(--units-07vw);
+		min-width: var(--units-2_5vw);
+	}
+
 	.date {
 		margin-left: var(--units-07vw);
 	}
@@ -88,8 +99,12 @@
 	}
 	.back-container {
 		height: 100%;
-		min-width: var(--units-4vw);
+		min-width: var(--units-5vw);
 		/* border: 1px solid pink; */
+	}
+
+	.back-container img {
+		width: 100%;
 	}
 
 	.header-container {
@@ -104,6 +119,7 @@
 		text-align: left;
 		font-size: var(--units-2_5vw);
 		padding: var(--units-1vw);
+		min-height: var(--units-8vw);
 	}
 
 	.circle-button {
@@ -141,5 +157,7 @@
 
 	.button-cont img {
 		margin-right: 1px;
+		height: 100%;
+		width: 100%;
 	}
 </style>

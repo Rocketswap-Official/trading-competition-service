@@ -1,5 +1,5 @@
 import { log } from "./logger";
-import { I_Kvp } from "../types";
+import { I_Kvp, T_Resolution } from "../types";
 import { TradeHistoryEntity } from "../entities/core/trade-history.entity";
 import { PairEntity } from "../entities/core/pair.entity";
 
@@ -164,4 +164,28 @@ export const countPairsWithHistoricalTrade = async () => {
 	}
 
 	return results
+}
+
+export const calcSecondsInResolution = (resolution: T_Resolution): number => {
+	const suffix = resolution[resolution.length - 1]
+	const prefix = Number(resolution.substring(0, resolution.length - 1))
+	return prefix * seconds_map[suffix]
+}
+
+export const seconds_map = {
+	m: 60,
+	h: 3600,
+	d: 86400,
+	w: 604800
+}
+
+export function calcMissedWindows(trades: TradeHistoryEntity[], start_unix: number, seconds_resolution: number, number_of_windows: number) {
+	let missed = 0
+	for (let i = 0; i < number_of_windows; i++) {
+		let start = (start_unix / 1000) + (i * seconds_resolution)
+		let end = (start_unix / 1000) + (i * seconds_resolution) + seconds_resolution
+		let trade = trades.find(t => t.time >= start && t.time < end)
+		if (!trade) missed++
+	}
+	return missed
 }

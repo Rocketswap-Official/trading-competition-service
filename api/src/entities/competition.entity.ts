@@ -7,7 +7,8 @@ import {
 	MoreThan,
 	LessThan
 } from "typeorm";
-import { I_Comp, I_CompJson, I_Kvp, T_CompDate } from "../types";
+import { I_Comp, I_Kvp, T_CompDate, T_CompType, T_Resolution, I_TradingComp } from "../types";
+import { calcSecondsInResolution } from "../utils/misc-utils";
 var crypto = require('crypto');
 
 
@@ -42,9 +43,27 @@ export class CompetitionEntity extends BaseEntity implements I_Comp {
 
 	@Column()
 	date_end_unix: number // Unix Datetime
+
+	@Column({ nullable: true })
+	type?: T_CompType
+
+	@Column({ nullable: true })
+	chunk_window?: T_Resolution
+
+	@Column({ nullable: true })
+	missed_window_threshold_pct?: number
+
+	@Column({ nullable: true })
+	missed_window_threshold?: number
+
+	@Column({ nullable: true })
+	missed_window_penalty_pct?: number
+
+	@Column({ nullable: true })
+	total_windows?: number
 }
 
-export async function createCompetitions(comp_json: I_CompJson[]) {
+export async function createCompetitions(comp_json: I_TradingComp[]) {
 	const entities_to_save = []
 	for (let comp of comp_json) {
 		const comp_id = constructCompetitionId(comp)
@@ -61,13 +80,21 @@ export async function createCompetitions(comp_json: I_CompJson[]) {
 			entity.reward_contract = comp.reward_contract
 			entity.comp_contract = comp.comp_contract
 			entity.comp_contract_title = comp.comp_contract_title
+			entity.type = comp.type = comp.type || "basic"
+			entity.chunk_window = comp.chunk_window || null
+			entity.missed_window_penalty_pct = comp.missed_window_penalty_pct || null
+			entity.missed_window_threshold_pct = comp.missed_window_threshold_pct || null
+			entity.total_windows = entity.chunk_window ? Math.round((entity.date_end_unix - entity.date_start_unix) / calcSecondsInResolution(comp.chunk_window) / 1000) : null
+			entity.missed_window_threshold = entity.chunk_window ?
+				Math.round((entity.date_end_unix - entity.date_start_unix) / calcSecondsInResolution(comp.chunk_window) / 1000) * (entity.missed_window_threshold_pct / 100) :
+				null
 			entities_to_save.push(entity)
 		}
 	}
 	await CompetitionEntity.insert(entities_to_save)
 }
 
-function constructCompetitionId(comp_data: I_CompJson) {
+function constructCompetitionId(comp_data: I_TradingComp) {
 	const str = `${comp_data.comp_contract}${constructDate(comp_data.date_start).getTime()}`
 	// return crypto.createHash('md5').update(str).digest('hex');
 	return str
