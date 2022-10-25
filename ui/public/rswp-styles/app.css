@@ -48,6 +48,9 @@
 		--units-2_2vw: calc(2.2vw * var(--breakpoint-multiplier));
 		--units-2_3vw: calc(2.3vw * var(--breakpoint-multiplier));
 		--units-2_5vw: calc(2.5vw * var(--breakpoint-multiplier));
+		--units-2_7vw: calc(2.7vw * var(--breakpoint-multiplier));
+		--units-2_8vw: calc(2.8vw * var(--breakpoint-multiplier));
+		--units-2_9vw: calc(2.9vw * var(--breakpoint-multiplier));
 		--units-3vw: calc(3vw * var(--breakpoint-multiplier));
 		--units-3_1vw: calc(3.1vw * var(--breakpoint-multiplier));
 		--units-3_2vw: calc(3.2vw * var(--breakpoint-multiplier));
@@ -76,6 +79,7 @@
 		--units-37vw: calc(37vw * var(--breakpoint-multiplier));
 
 	--primary-gradient: linear-gradient(95.08deg, #C5FFAA 2.49%, #00BAC6 97.19%);
+	--primary-gradient-fade: linear-gradient(95.08deg, #00BAC6 2.49%, #C5FFAA01 97.19%);
 	--primary-gradient-webkit: -webkit-linear-gradient(95.08deg, #C5FFAA 2.49%, #00BAC6 97.19%);
 	--secondary-gradient: linear-gradient(95.08deg, #CF69FC 2.49%, #AF05FA 48.36%, #8C04C8 97.19%);
 	--secondary-gradient-webkit: linear-gradient(95.08deg, #CF69FC 2.49%, #AF05FA 48.36%, #8C04C8 97.19%);
@@ -477,6 +481,14 @@ img.sort-arrow.flip{
 	padding-right: var(--units-1vw);
 }
 
+/* @media (max-width: 1200px) {
+	:root{
+		--unit-base-1vw: 5px !important;
+
+		--breakpoint-multiplier: 2 !important;
+	}
+} */
+
 @media (max-width: 1920px) {
 	:root{
 		--units-005vw: 0.05vw;
@@ -633,7 +645,7 @@ img.sort-arrow.flip{
 
 
 
-@media (max-width: 480px) {
+@media (max-width: 1200px) {
 	:root{
 		--breakpoint-multiplier: 1.7;
 		--units-005vw: calc(var(--unit-base-1vw) * 0.05 * var(--breakpoint-multiplier));

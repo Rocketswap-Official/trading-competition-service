@@ -12,7 +12,7 @@ function constructTestingUrl() {
 
 export async function syncCompetitions() {
     try {
-        const competitions = (await axios.get(`${base_url}get_competitions/`)).data;
+        const competitions = (await axios.get(`${base_url}get_competitions_sorted/`)).data;
         competitions_store.set(competitions)
         console.log(competitions)
     } catch (err) {

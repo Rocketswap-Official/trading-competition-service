@@ -7,10 +7,10 @@
 	import { startStars } from "../utils/canvas.utils";
 	import Header from "./header.svelte";
 	import { competitions_store } from "../store";
+	import Modal from "./modal.svelte";
 
 	onMount(async () => {
 		await startSyncCompetitionTimer();
-		startStars();
 	});
 
 	async function startSyncCompetitionTimer() {
@@ -21,7 +21,7 @@
 	}
 </script>
 
-{#if $competitions_store.length}
+{#if $competitions_store['active']}
 	<main>
 		<div
 			style="position: absolute; top:0%; left: 0%; text-align: center; height: 100%; width: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column"
@@ -33,11 +33,13 @@
 				</div>
 			</div>
 		</div>
+		<!-- <canvas id="canvas" style="width: 100%; height: 100%; padding: 0; margin: 0; z-index: 99" /> -->
 		<Stars />
 		<div id="powered">
 			<PoweredByLamden />
 		</div>
 	</main>
+	<!-- <Modal/> -->
 {/if}
 
 <style>
@@ -108,7 +110,7 @@
 			padding: 0px;
 		}
 
-		:global(.comp-header, .comp-item) {
+		:global(.comp-headings, .comp-item) {
 			width: 100%;
 			display: flex;
 			flex-direction: row;
@@ -119,6 +121,13 @@
 			-webkit-box-sizing: border-box;
 		}
 
+		:global(.comp-title) {
+			padding: 14px 6px !important;
+		}
 
+		:global(.header-title) {
+			padding: var(--units-0_5vw);
+			overflow-x: hidden;
+		}
 	}
 </style>

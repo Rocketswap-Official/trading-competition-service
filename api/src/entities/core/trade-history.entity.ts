@@ -36,6 +36,9 @@ export class TradeHistoryEntity extends BaseEntity {
 
 	@Column({ nullable: true })
 	reserves?: number;
+
+	@Column({ nullable: true })
+	is_trade?: boolean;
 }
 
 export interface ITrade {
@@ -49,6 +52,7 @@ export interface ITrade {
 	contract_name: string;
 	vk: string;
 	hash: string;
+	is_trade: boolean
 }
 
 export async function saveTradeUpdate(args: {
@@ -72,7 +76,7 @@ export async function saveTradeUpdate(args: {
 
 export const parseTrades = async (history: any[], contract_name: string, token_symbol: string) => {
 	try {
-		let most_recent_trade = await findMostRecentTradeFromDb(contract_name);
+		let most_recent_trade = await findMostRecentReservesChangeFromDb(contract_name);
 		const most_recent_trade_uid = most_recent_trade ? most_recent_trade.tx_uid : "0";
 
 		let last_most_recent_trade;
@@ -80,18 +84,18 @@ export const parseTrades = async (history: any[], contract_name: string, token_s
 		if (most_recent_trade) {
 			last_most_recent_trade = await findLastMostRecentTradeFromDb(contract_name);
 		}
-
-		const trade_transactions = history.filter((item) => {
+		log.log({ history_length: history.length })
+		const reserves_transactions = history.filter((item) => {
 			return (
-				item.affectedRootKeysList.includes(`${config.amm_contract}.reserves:${contract_name}`) &&
-				item.affectedRootKeysList.includes(`${config.amm_contract}.prices:${contract_name}`)
+				item.affectedRootKeysList.includes(`${config.amm_contract}.reserves:${contract_name}`)
 			);
 		});
 
 		const parsed_trades: ITrade[] = [];
 
-		trade_transactions.forEach((curr_value, index) => {
-			const prev_value = trade_transactions[index - 1];
+		reserves_transactions.forEach((curr_value, index) => {
+			const is_trade = curr_value.affectedRootKeysList.includes(`${config.amm_contract}.prices:${contract_name}`)
+			const prev_value = reserves_transactions[index - 1];
 
 			let prev_reserves_token;
 
@@ -112,7 +116,7 @@ export const parseTrades = async (history: any[], contract_name: string, token_s
 			base_volume = base_volume > 0 ? base_volume : base_volume * -1;
 			const tx_uid = curr_value.tx_uid;
 			const timestamp = curr_value.timestamp / 1000;
-			const base_price = getNumberFromFixed(curr_value.state_changes_obj[`${config.amm_contract}`].prices[`${contract_name}`]);
+			const base_price = is_trade ? getNumberFromFixed(curr_value.state_changes_obj[`${config.amm_contract}`].prices[`${contract_name}`]) : 0
 			const vk = getVkFromKeys(curr_value.affectedRootKeysList);
 			const hash = curr_value.txInfo.hash;
 
@@ -126,7 +130,8 @@ export const parseTrades = async (history: any[], contract_name: string, token_s
 				token_symbol,
 				contract_name,
 				vk,
-				hash
+				hash,
+				is_trade
 			};
 			parsed_trades.push(trade);
 		});
@@ -137,8 +142,8 @@ export const parseTrades = async (history: any[], contract_name: string, token_s
 	}
 };
 
-export const findMostRecentTradeFromDb = async (contract_name: string) => {
-	const most_recent_trade = await TradeHistoryEntity.findOne({
+export const findMostRecentReservesChangeFromDb = async (contract_name: string) => {
+	const most_recent_reserves_change = await TradeHistoryEntity.findOne({
 		where: {
 			contract_name
 		},
@@ -146,7 +151,7 @@ export const findMostRecentTradeFromDb = async (contract_name: string) => {
 			time: "DESC"
 		}
 	});
-	return most_recent_trade;
+	return most_recent_reserves_change;
 };
 
 export const findLastMostRecentTradeFromDb = async (contract_name: string): Promise<TradeHistoryEntity> => {

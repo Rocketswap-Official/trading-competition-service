@@ -1,8 +1,8 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { time } from 'console';
-import { Between } from 'typeorm';
+import { Between, Entity } from 'typeorm';
 import { config } from './config';
-import { CompetitionEntity, createCompetitions, findActiveCompetitions } from './entities/competition.entity';
+import { CompetitionEntity, createCompetitions, decideCompStatus, findActiveCompetitions, getFreshComps } from './entities/competition.entity';
 import { TradeHistoryEntity } from './entities/core/trade-history.entity';
 import { UserResultEntity } from './entities/user-result.entity';
 import { I_TradingComp } from './types';
@@ -17,25 +17,47 @@ export class AppService implements OnModuleInit {
   async onModuleInit() {
     await CompetitionEntity.clear()
     await UserResultEntity.clear()
-    await this.loadCompetitions()
-    this.createUpdateCompStatsTimer()
+
   }
 
-  createUpdateCompStatsTimer() {
-    const timer = setTimeout(async () => {
+  async createUpdateCompStatsTimer() {
+    setTimeout(async () => {
       await this.updateCompStats()
       this.createUpdateCompStatsTimer()
     }, config.frequency)
+  }
+
+  async onApplicationBootstrap() {
+    await this.loadCompetitions()
+    await this.initComps()
+    this.createUpdateCompStatsTimer()
   }
 
   async updateCompStats() {
     log.log(`updating comp stats`)
     const active_comps = await findActiveCompetitions()
 
+    const to_save = []
     for (let comp of active_comps) {
       if (comp.type === "basic") await this.processBasicComp(comp)
       else if (comp.type === "windowed") await this.processWindowedComp(comp)
+      comp.status = decideCompStatus(comp)
+      to_save.push(comp)
     }
+    await CompetitionEntity.save(to_save)
+  }
+
+  async initComps() {
+    const fresh_comps = await getFreshComps()
+    const to_save = []
+    log.log(fresh_comps.length)
+    for (let comp of fresh_comps) {
+      if (comp.type === "basic") await this.processBasicComp(comp)
+      else if (comp.type === "windowed") await this.processWindowedComp(comp)
+      comp.status = decideCompStatus(comp)
+      to_save.push(comp)
+    }
+    await CompetitionEntity.save(to_save)
   }
 
   private async processWindowedComp(comp: CompetitionEntity) {
@@ -146,6 +168,19 @@ export class AppService implements OnModuleInit {
     });
 
     await createCompetitions(competition_data as I_TradingComp[])
+  }
+
+  public async getCompetitionWinners(comp_id: string) {
+    const comp = await CompetitionEntity.findOne(comp_id)
+    const prizes = comp.prizes.map(p => Number(p))
+    const total = prizes.reduce((prev, curr) => curr + prev, 0)
+    log.log(prizes)
+    log.log(prizes.length)
+    log.log(comp_id)
+    const sorting_args: { volume_tau: "DESC" } | { volume_tau_net: "DESC" } = comp.type === "basic" ? { volume_tau: "DESC" } : { volume_tau_net: "DESC" }
+    const winners = (await UserResultEntity.find({ where: { competition_id: comp_id }, take: prizes.length, order: sorting_args })).map(u => u.user_vk)
+    log.log({ winners })
+    return { prizes, winners, total }
   }
 }
 

@@ -8,6 +8,7 @@
 	let show_back = false;
 	let active_title = home_title;
 	let comp;
+	let competitions = $competitions_store;
 
 	onMount(() => {
 		handleUrl(window.location.href);
@@ -40,7 +41,11 @@
 
 		if (page === "competition") {
 			// competition page
-			comp = $competitions_store.find((c) => c.id === arg);
+			comp =
+				competitions["active"].find((c) => c.id === arg) ||
+				competitions["upcoming"].find((c) => c.id === arg) ||
+				competitions["finished"].find((c) => c.id === arg);
+
 			active_title = `${comp.comp_contract_title} Leaderboard`;
 			show_back = true;
 		}
@@ -54,7 +59,7 @@
 				<a href={`/#/`} class="circle-button gradient-button-1"><img src="icon-back.svg" alt="" /></a>
 			</div>
 		{:else}
-			<div class="button-cont flex align-center">
+			<div class="button-cont flex align-center justify-center">
 				<img class="logo" src="rswp-logo.svg" alt="" />
 			</div>
 		{/if}
@@ -79,11 +84,11 @@
 </div>
 
 <style>
-
 	.logo {
 		margin-left: var(--units-1_5vw);
 		margin-top: var(--units-07vw);
-		min-width: var(--units-2_5vw);
+		min-width: var(--units-3vw);
+		min-height: var(--units-3vw)
 	}
 
 	.date {
@@ -108,9 +113,10 @@
 	}
 
 	.header-container {
+		/* overflow: hidden; */
 		width: 100%;
 		/* padding: 25px 25px; */
-		min-height: var(--units-7vw);
+		min-height: var(--units-10vw);
 		/* border: 1px solid purple; */
 		/* height: var(--units-2vw); */
 	}

@@ -61,6 +61,9 @@ export class CompetitionEntity extends BaseEntity implements I_Comp {
 
 	@Column({ nullable: true })
 	total_windows?: number
+
+	@Column()
+	status: "upcoming" | "active" | "finished"
 }
 
 export async function createCompetitions(comp_json: I_TradingComp[]) {
@@ -80,6 +83,7 @@ export async function createCompetitions(comp_json: I_TradingComp[]) {
 			entity.reward_contract = comp.reward_contract
 			entity.comp_contract = comp.comp_contract
 			entity.comp_contract_title = comp.comp_contract_title
+			entity.status = decideCompStatus(entity)
 			entity.type = comp.type = comp.type || "basic"
 			entity.chunk_window = comp.chunk_window || null
 			entity.missed_window_penalty_pct = comp.missed_window_penalty_pct || null
@@ -94,15 +98,30 @@ export async function createCompetitions(comp_json: I_TradingComp[]) {
 	await CompetitionEntity.insert(entities_to_save)
 }
 
+export function decideCompStatus(entity: CompetitionEntity) {
+	if (Date.now() > entity.date_end_unix) {
+		return "finished"
+	} else if (Date.now() < entity.date_start_unix)
+		return "upcoming"
+	else {
+		return "active"
+	}
+}
+
 function constructCompetitionId(comp_data: I_TradingComp) {
 	const str = `${comp_data.comp_contract}${constructDate(comp_data.date_start).getTime()}`
 	// return crypto.createHash('md5').update(str).digest('hex');
 	return str
 }
 
+export async function getFreshComps() {
+	const fresh_comps = await CompetitionEntity.find()
+	return fresh_comps
+}
+
 export async function findActiveCompetitions() {
 	const now = Date.now()
-	const active_comps = (await CompetitionEntity.find({ where: { date_end: MoreThan(now) } })).filter((c) => c.date_start_unix < now)
+	const active_comps = (await CompetitionEntity.find({ where: { date_end_unix: MoreThan(now) } })).filter((c) => c.date_start_unix < now)
 	return active_comps
 }
 
