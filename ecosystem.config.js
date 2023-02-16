@@ -1,15 +1,15 @@
 module.exports = {
 	apps: [
 		{
-			name: "ui",
+			name: "lb-ui",
 			script: "cd ./ui && npm run start"
 		},
 		{
-			name: "api",
+			name: "lb-api",
 			script: "cd ./api && npm run start"
 		},
 		{
-			name: "proxy",
+			name: "lb-proxy",
 			script: "cd ./proxy_server && npm run start"
 		}
 	]
