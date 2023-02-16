@@ -8,6 +8,7 @@ import {
 	LessThan
 } from "typeorm";
 import { I_Comp, I_Kvp, T_CompDate, T_CompType, T_Resolution, I_TradingComp } from "../types";
+import { returnPayoutStructure } from "../utils/comp-utils";
 import { calcSecondsInResolution } from "../utils/misc-utils";
 var crypto = require('crypto');
 
@@ -78,7 +79,7 @@ export async function createCompetitions(comp_json: I_TradingComp[]) {
 			entity.date_end_unix = entity.date_end.getTime()
 			entity.date_start = constructDate(comp.date_start)
 			entity.date_start_unix = entity.date_start.getTime()
-			entity.prizes = comp.prizes
+			entity.prizes = returnPayoutStructure(comp.prizes)
 			entity.reward_contract_title = comp.reward_contract_title
 			entity.reward_contract = comp.reward_contract
 			entity.comp_contract = comp.comp_contract
@@ -132,7 +133,7 @@ export async function findAllCompetitions() {
 function constructDate(date: T_CompDate) {
 	const { year, month, day, hour } = date
 	const { hours_offset } = calcUtcOffset()
-	return new Date(year, month, day, hour + hours_offset)
+	return new Date(year, month - 1, day, hour + hours_offset)
 }
 
 function calcUtcOffset() {

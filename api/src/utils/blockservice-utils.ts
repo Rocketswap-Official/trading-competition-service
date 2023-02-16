@@ -125,24 +125,37 @@ export async function getBlock(num: number): Promise<any> {
 }
 
 
-export async function fillBlocksSinceSync(block_to_sync_from: number, parseBlock: T_ParseBlockFn): Promise<void> {
+export async function fillBlocksSinceSync(block_to_sync_from: number, parseBlock: T_ParseBlockFn, did_recurse = false): Promise<void> {
+	const batch_size = 100;
 	try {
 		let current_block = await getLatestSyncedBlock();
 		if (block_to_sync_from === current_block) {
 			log.log("Finished syncing historical blocks");
 			return;
 		}
-		let next_block_to_sync = block_to_sync_from + 1;
-		const block = await getBlock(next_block_to_sync);
-		await handleNewBlock(block, parseBlock);
-		if (next_block_to_sync <= current_block) return await fillBlocksSinceSync(next_block_to_sync, parseBlock);
+		const blocks = await getBlocks(batch_size, block_to_sync_from);
+		for (let i = 0; i < blocks.length; i++) {
+			// inline function which causes the loop to wait for 100ms
+			if (did_recurse && i === 0) continue; // skip first block if we are recursing (we already handled it
+			await handleNewBlock(blocks[i], parseBlock);
+			// await wait(100);
+		}
+		if (blocks.length === batch_size) {
+			block_to_sync_from = blocks[blocks.length - 1].number;
+			return await fillBlocksSinceSync(block_to_sync_from, parseBlock, did_recurse);
+		}
 	} catch (err) {
 		log.warn({ err });
 	}
 }
 
+export async function getBlocks(limit: number, start_block: number): Promise<any> {
+	const res = await axios(`http://${BlockService.get_block_service_url}/blocks?limit=${limit}&start_block=${start_block}`);
+	return res.data;
+}
 
 export async function syncTradeHistory(starting_tx_id: string = "0") {
+	log.log("syncing trade history !!! :)")
 	const pairs = await PairEntity.find();
 	for (let p of pairs) {
 		await syncTokenTradeHistory(starting_tx_id, 3000, p.contract_name, p.token_symbol);
@@ -165,7 +178,6 @@ export const syncTradeHistoryFromLatestTradeInDb = async () => {
 
 export const getTxIdFromHash = async (hash: string) => {
 	try {
-		// http://45.63.58.204:3535/tx?hash=df2c7e424e74d19e7fe28545b57179639a4021f38b9a15da0c4d80a678daceb5
 		const res = await axios.get(`http://${BlockService.get_block_service_url()}/tx?hash=${hash}`);
 		const uid = res.data.tx_uid
 		log.log({ fn: "getTxIdFromHash", uid })
@@ -187,7 +199,7 @@ export const syncTokenTradeHistory = async (starting_tx_id = "0", batch_size = 3
 	});
 	const history = res.history;
 	const length = history.length;
-
+	log.log({history})
 	const trades = await parseTrades(history, contract_name, token_symbol);
 	await saveTradesToDb(trades);
 
@@ -201,6 +213,8 @@ export const syncTokenTradeHistory = async (starting_tx_id = "0", batch_size = 3
 export const syncAmmCurrentState = async () => {
 	const current_state = await getContractState(config.amm_contract);
 	const amm_state = current_state[config.amm_contract];
+
+	log.log({pairs: amm_state.reserves})
 
 	if (amm_state) {
 		const { lp_points, reserves } = amm_state;

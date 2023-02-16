@@ -111,11 +111,12 @@ export const parseTrades = async (history: any[], contract_name: string, token_s
 			const curr_reserves_token = getNumberFromFixed(
 				curr_value.state_changes_obj[`${config.amm_contract}`].reserves[`${contract_name}`][1]
 			);
+ 
 			const action = prev_reserves_token < curr_reserves_token ? "sell" : "buy";
 			let base_volume = action === "buy" ? curr_reserves_token - prev_reserves_token : prev_reserves_token - curr_reserves_token;
 			base_volume = base_volume > 0 ? base_volume : base_volume * -1;
 			const tx_uid = curr_value.tx_uid;
-			const timestamp = curr_value.timestamp / 1000;
+			const timestamp = curr_value.blockNum / 1000000;
 			const base_price = is_trade ? getNumberFromFixed(curr_value.state_changes_obj[`${config.amm_contract}`].prices[`${contract_name}`]) : 0
 			const vk = getVkFromKeys(curr_value.affectedRootKeysList);
 			const hash = curr_value.txInfo.hash;

@@ -80,7 +80,7 @@ export interface I_TradingComp {
     comp_contract_title: string,
     reward_contract: string,
     reward_contract_title: string,
-    prizes: number[],
+    prizes: number,
     date_start: T_CompDate,
     date_end: T_CompDate,
     type?: T_CompType,

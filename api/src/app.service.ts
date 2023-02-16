@@ -63,7 +63,7 @@ export class AppService implements OnModuleInit {
   private async processWindowedComp(comp: CompetitionEntity) {
     log.log(`updating : ${comp.type} :: ${comp.id} :: ${comp.comp_contract_title}/${comp.reward_contract_title}`)
     const book_end = comp.date_end_unix >= Date.now() ? Date.now() : comp.date_end_unix
-    const trades = await TradeHistoryEntity.find({ where: { time: Between(comp.date_start_unix / 1000, comp.date_end_unix / 1000), contract_name: comp.comp_contract } })
+    const trades = await TradeHistoryEntity.find({ where: { time: Between(comp.date_start_unix, comp.date_end_unix), contract_name: comp.comp_contract } })
     const trades_filtered = trades.filter(t => !config.blacklisted_addresses.includes(t.vk))
     const seconds_resolution = calcSecondsInResolution(comp.chunk_window)
     const total_number_of_windows = Math.floor(((comp.date_end_unix - comp.date_start_unix) / 1000) / seconds_resolution)
@@ -113,7 +113,7 @@ export class AppService implements OnModuleInit {
   private async processBasicComp(comp: CompetitionEntity) {
     log.log(`updating : ${comp.type} :: ${comp.id} :: ${comp.comp_contract_title}/${comp.reward_contract_title}`)
 
-    const trades = await TradeHistoryEntity.find({ where: { time: Between(comp.date_start_unix / 1000, comp.date_end_unix / 1000), contract_name: comp.comp_contract } })
+    const trades = await TradeHistoryEntity.find({ where: { time: Between(comp.date_start_unix, comp.date_end_unix), contract_name: comp.comp_contract } })
     const trades_filtered = trades.filter(t => !config.blacklisted_addresses.includes(t.vk))
     const volume_by_vk = trades_filtered.reduce((accum, trade) => {
       accum[trade.vk] = accum[trade.vk] ? accum[trade.vk] + (Number(trade.amount) * Number(trade.price)) : Number(trade.amount) * Number(trade.price)
