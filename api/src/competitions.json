@@ -1,52 +1,40 @@
 [
   {
-    "comp_contract": "con_lambdoge",
-    "comp_contract_title": "LDOGE",
-    "reward_contract": "con_lambdoge",
-    "reward_contract_title": "LDOGE",
-    "prizes": [
-      2500000000,
-      2000000000,
-      1750000000,
-      1500000000,
-      1250000000,
-      1000000000,
-      75000000,
-      75000000,
-      75000000,
-      25000000,
-      12500000
-    ],
+    "comp_contract": "con_portal",
+    "comp_contract_title": "XPTL",
+    "reward_contract": "con_portal",
+    "reward_contract_title": "XPTL",
+    "prizes": 50000,
     "date_start": {
-      "year": 2022,
-      "month": 9,
-      "day": 7,
-      "hour": 16
+      "year": 2023,
+      "month": 2,
+      "day": 17,
+      "hour": 1
     },
     "date_end": {
-      "year": 2022,
-      "month": 9,
-      "day": 14,
-      "hour": 16
+      "year": 2023,
+      "month": 2,
+      "day": 24,
+      "hour": 1
     }
   },
   {
-    "comp_contract": "con_lusd_lst001",
-    "comp_contract_title": "LUSD",
-    "reward_contract": "con_lusd_lst001",
-    "reward_contract_title": "LUSD",
-    "prizes": [30, 20, 10, 10, 5, 5, 5, 5, 5],
+    "comp_contract": "con_trt",
+    "comp_contract_title": "TRT",
+    "reward_contract": "con_trt",
+    "reward_contract_title": "TRT",
+    "prizes": 250000,
     "date_start": {
-      "year": 2022,
-      "month": 9,
-      "day": 7,
-      "hour": 16
+      "year": 2023,
+      "month": 2,
+      "day": 17,
+      "hour": 1
     },
     "date_end": {
-      "year": 2022,
-      "month": 9,
-      "day": 14,
-      "hour": 16
+      "year": 2023,
+      "month": 2,
+      "day": 24,
+      "hour": 1
     }
   },
   {
@@ -54,18 +42,18 @@
     "comp_contract_title": "RSWP",
     "reward_contract": "con_rswp_lst001",
     "reward_contract_title": "RSWP",
-    "prizes": [25000, 20000, 15000, 10000, 5000, 2500, 2500, 2500, 2500],
+    "prizes": 35000,
     "date_start": {
-      "year": 2022,
-      "month": 9,
-      "day": 7,
-      "hour": 16
+      "year": 2023,
+      "month": 2,
+      "day": 17,
+      "hour": 1
     },
     "date_end": {
-      "year": 2022,
-      "month": 9,
-      "day": 14,
-      "hour": 16
+      "year": 2023,
+      "month": 2,
+      "day": 24,
+      "hour": 1
     }
   }
 ]

@@ -21,6 +21,18 @@
     "symbol": "LUSD",
     "name": "Lamden USD",
     "contract_name": "con_lusd_001",
-    "description": "LUSD is USDC which has been bridged to the Lamden network via the Lamden Link bridge."
+    "description": "LUSD is BUSD which has been bridged to the Lamden network via the Lamden Link bridge."
+  },
+  "con_portal": {
+    "symbol": "XPTL",
+    "name": "Portal",
+    "contract_name": "con_portal",
+    "description": "XPTL powers Portal, a project which allows users to create yield vaults for their tokens."
+  },
+  "con_trt": {
+    "symbol": "TRT",
+    "name": "Taurus Reward Token",
+    "contract_name": "con_trt",
+    "description": "Taurus is a up and coming NFT marketplace on Lamden, TRT is awarded to users upon selling NFTs on the platform."
   }
 }
