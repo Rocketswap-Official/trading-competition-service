@@ -163,7 +163,7 @@ const processTrade = async (
     price,
     amount: String(volume),
     type,
-    time: timestamp,
+    time: timestamp * 1000,
     hash,
     vk,
   })
