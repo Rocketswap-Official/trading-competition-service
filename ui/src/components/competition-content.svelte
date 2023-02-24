@@ -2,6 +2,7 @@
 	import { addCommas, getDateFromUnix, getFullPrize, getUtcTimeFromUnix } from "../utils/misc.utils";
 	import { gotoPath, openLinkInNewTab } from "../utils/nav.utils";
 	import NoCompetitions from "./no-competitions.svelte";
+	import Button from "./elements/button/button.svelte";
 
 	export let competitions;
 	export let title;
