@@ -126,6 +126,11 @@ export async function findActiveCompetitions() {
 	return active_comps
 }
 
+export async function findComps() {
+	const active_comps = await CompetitionEntity.find()
+	return active_comps
+}
+
 export async function findAllCompetitions() {
 	return await CompetitionEntity.find()
 }
