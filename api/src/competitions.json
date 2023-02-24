@@ -1,5 +1,43 @@
 [
   {
+    "comp_contract": "con_reflecttau_v2",
+    "comp_contract_title": "RTAU",
+    "reward_contract": "con_reflecttau_v2",
+    "reward_contract_title": "RTAU",
+    "prizes": 17000,
+    "date_start": {
+      "year": 2023,
+      "month": 2,
+      "day": 24,
+      "hour": 12
+    },
+    "date_end": {
+      "year": 2023,
+      "month": 3,
+      "day": 10,
+      "hour": 12
+    }
+  },
+  {
+    "comp_contract": "con_portal",
+    "comp_contract_title": "XPTL",
+    "reward_contract": "con_portal",
+    "reward_contract_title": "XPTL",
+    "prizes": 100000,
+    "date_start": {
+      "year": 2023,
+      "month": 2,
+      "day": 24,
+      "hour": 12
+    },
+    "date_end": {
+      "year": 2023,
+      "month": 3,
+      "day": 10,
+      "hour": 12
+    }
+  },
+  {
     "comp_contract": "con_portal",
     "comp_contract_title": "XPTL",
     "reward_contract": "con_portal",
